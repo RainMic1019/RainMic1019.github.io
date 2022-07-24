@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>设计模式学习（十一）：外观模式 | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/images/logo.png">
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.0ab6a768.css" as="style"><link rel="preload" href="/assets/js/app.7f7d5479.js" as="script"><link rel="preload" href="/assets/js/3.6b2b6a96.js" as="script"><link rel="preload" href="/assets/js/1.7736d492.js" as="script"><link rel="preload" href="/assets/js/38.1e705c1e.js" as="script"><link rel="prefetch" href="/assets/js/10.30ee9261.js"><link rel="prefetch" href="/assets/js/11.18776277.js"><link rel="prefetch" href="/assets/js/12.6324240f.js"><link rel="prefetch" href="/assets/js/13.fd8fa2bf.js"><link rel="prefetch" href="/assets/js/14.94f19761.js"><link rel="prefetch" href="/assets/js/15.ad9b979a.js"><link rel="prefetch" href="/assets/js/16.0a02c160.js"><link rel="prefetch" href="/assets/js/17.7882760a.js"><link rel="prefetch" href="/assets/js/18.49ad805b.js"><link rel="prefetch" href="/assets/js/19.7b7c3fd7.js"><link rel="prefetch" href="/assets/js/20.f418fa91.js"><link rel="prefetch" href="/assets/js/21.39d2486d.js"><link rel="prefetch" href="/assets/js/22.c7ccf860.js"><link rel="prefetch" href="/assets/js/23.d22fd590.js"><link rel="prefetch" href="/assets/js/24.5d3b7800.js"><link rel="prefetch" href="/assets/js/25.775770d1.js"><link rel="prefetch" href="/assets/js/26.7b2ab4d9.js"><link rel="prefetch" href="/assets/js/27.76b1592a.js"><link rel="prefetch" href="/assets/js/28.609745e1.js"><link rel="prefetch" href="/assets/js/29.31bae526.js"><link rel="prefetch" href="/assets/js/30.004c18a8.js"><link rel="prefetch" href="/assets/js/31.eaef37fe.js"><link rel="prefetch" href="/assets/js/32.a23efa44.js"><link rel="prefetch" href="/assets/js/33.2a99b3f4.js"><link rel="prefetch" href="/assets/js/34.a248497b.js"><link rel="prefetch" href="/assets/js/35.30969e0f.js"><link rel="prefetch" href="/assets/js/36.d0cdc12e.js"><link rel="prefetch" href="/assets/js/37.4abcc8ae.js"><link rel="prefetch" href="/assets/js/39.32bf6bbb.js"><link rel="prefetch" href="/assets/js/4.c312d915.js"><link rel="prefetch" href="/assets/js/40.f6436697.js"><link rel="prefetch" href="/assets/js/41.c5817ce8.js"><link rel="prefetch" href="/assets/js/42.b90aaa03.js"><link rel="prefetch" href="/assets/js/43.06e19a12.js"><link rel="prefetch" href="/assets/js/44.d79f1082.js"><link rel="prefetch" href="/assets/js/45.e1391ff6.js"><link rel="prefetch" href="/assets/js/46.f6fd13fd.js"><link rel="prefetch" href="/assets/js/47.6575b1f3.js"><link rel="prefetch" href="/assets/js/48.cc2f564d.js"><link rel="prefetch" href="/assets/js/49.8a965663.js"><link rel="prefetch" href="/assets/js/5.3b862bf4.js"><link rel="prefetch" href="/assets/js/50.2f0d4829.js"><link rel="prefetch" href="/assets/js/51.b99c30d6.js"><link rel="prefetch" href="/assets/js/52.534070eb.js"><link rel="prefetch" href="/assets/js/53.7ba7e9e5.js"><link rel="prefetch" href="/assets/js/54.45838113.js"><link rel="prefetch" href="/assets/js/55.1dc28459.js"><link rel="prefetch" href="/assets/js/56.a6c4810e.js"><link rel="prefetch" href="/assets/js/57.3ac33d68.js"><link rel="prefetch" href="/assets/js/58.3ab1817d.js"><link rel="prefetch" href="/assets/js/59.773a17b5.js"><link rel="prefetch" href="/assets/js/6.bd93b4fe.js"><link rel="prefetch" href="/assets/js/60.d91c4ebc.js"><link rel="prefetch" href="/assets/js/61.38272b61.js"><link rel="prefetch" href="/assets/js/62.23cafd6e.js"><link rel="prefetch" href="/assets/js/63.41623ff5.js"><link rel="prefetch" href="/assets/js/64.980f1aaa.js"><link rel="prefetch" href="/assets/js/65.291ee773.js"><link rel="prefetch" href="/assets/js/66.13465199.js"><link rel="prefetch" href="/assets/js/67.42eb3b3d.js"><link rel="prefetch" href="/assets/js/68.c5dcb024.js"><link rel="prefetch" href="/assets/js/69.edb50423.js"><link rel="prefetch" href="/assets/js/7.52fa8f8a.js"><link rel="prefetch" href="/assets/js/70.df25e05f.js"><link rel="prefetch" href="/assets/js/71.49c8fadf.js"><link rel="prefetch" href="/assets/js/72.c79c93f4.js"><link rel="prefetch" href="/assets/js/73.53cbe8b8.js"><link rel="prefetch" href="/assets/js/74.af4ea1a1.js"><link rel="prefetch" href="/assets/js/75.698a939d.js"><link rel="prefetch" href="/assets/js/76.4a8fb44b.js"><link rel="prefetch" href="/assets/js/77.9b92472d.js"><link rel="prefetch" href="/assets/js/78.e9f279f6.js"><link rel="prefetch" href="/assets/js/79.4dc35189.js"><link rel="prefetch" href="/assets/js/8.cb9c5b57.js"><link rel="prefetch" href="/assets/js/80.a7385d31.js"><link rel="prefetch" href="/assets/js/81.5631f2db.js"><link rel="prefetch" href="/assets/js/82.17745113.js"><link rel="prefetch" href="/assets/js/83.0bb9fe23.js"><link rel="prefetch" href="/assets/js/84.244a6c47.js"><link rel="prefetch" href="/assets/js/85.ccb25d9b.js"><link rel="prefetch" href="/assets/js/86.30d2da94.js"><link rel="prefetch" href="/assets/js/87.64cbce0b.js"><link rel="prefetch" href="/assets/js/88.ad4b33d6.js"><link rel="prefetch" href="/assets/js/89.9182ddfe.js"><link rel="prefetch" href="/assets/js/9.836966af.js"><link rel="prefetch" href="/assets/js/90.9abf9ea0.js"><link rel="prefetch" href="/assets/js/91.51aae0cb.js"><link rel="prefetch" href="/assets/js/92.6b891abc.js"><link rel="prefetch" href="/assets/js/93.5eb2db38.js"><link rel="prefetch" href="/assets/js/94.0e7ce2c0.js"><link rel="prefetch" href="/assets/js/95.c4cabbda.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0ab6a768.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-5bb33761><div data-v-5bb33761><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-5bb33761 data-v-5bb33761><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2022
+      </a></span></div></div> <div class="hide" data-v-5bb33761><header class="navbar" data-v-5bb33761><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/MessageBoard/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-5bb33761></div> <aside class="sidebar" data-v-5bb33761><div class="personal-info-wrapper" data-v-1fad0c41 data-v-5bb33761><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>82</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>23</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#f47e60;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#f47e60;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#f8b26a;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/MessageBoard/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-5bb33761><h3 class="title" data-v-59e6cb88>设计模式学习（十一）：外观模式</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2022
+      </a></span></div></div> <div data-v-5bb33761><div data-v-5bb33761><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">设计模式学习（十一）：外观模式</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2021/4/18</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/Blog/DesignPatterns/facade.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>C++</span><span class="tag-item" data-v-8a445198>设计模式</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1 前言</h2> <p>本周参加了第六次设计模式研讨会，主题是外观（FACADE）模式，接下来我们来看看该模式的具体内容。</p> <h2 id="_2-外观模式"><a href="#_2-外观模式" class="header-anchor">#</a> 2 外观模式</h2> <p><strong>FACADE 模式</strong>：隐藏系统的复杂性，并向客户端提供一个客户端可以访问系统的接口。</p> <p><strong>意图</strong>：为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</p> <p><strong>主要解决</strong>：降低访问复杂系统的内部子系统时的复杂度，简化客户端与之的接口。</p> <p><strong>实现核心</strong>：在客户端和复杂系统之间再加一层，这一层将调用顺序、依赖关系等处理好。</p> <h2 id="_3-实际例子"><a href="#_3-实际例子" class="header-anchor">#</a> 3 实际例子</h2> <p>例如有一个编译环境，它允许应用程序访问它的编译子系统。这个编译子系统包含了若干个类，如Scanner、Parser、ProgramNode、BytecodeStream和ProgramNodeBuilder，用于实现这一编译器。</p> <p>某些特殊程序需要直接访问这些类，但是<strong>大多数编译器的用户并不关心语法分析和代码生成这样的细节</strong>；他们只是希望编译一些代码。对这些用户，编译子系统中那些功能强大但层次较低的接口只会使他们的<strong>任务复杂化</strong>。</p> <p>为了提供一个高层的接口对客户屏蔽这些类，编译子系统还包括一个 Complier 类。该类<strong>定义了编译器功能的统一接口</strong>。 Complier类是一个外观，它给用户提供了一个单一而简单的编译子系统接口（<strong>它并不隐藏底层功能的接口</strong>）。</p> <p><img src="/assets/img/class1.05f7f940.png" alt="类图"></p> <h2 id="_4-结构与参与者"><a href="#_4-结构与参与者" class="header-anchor">#</a> 4 结构与参与者</h2> <p><img src="/assets/img/class2.b93e4a40.png" alt="类图"></p> <p><strong>Facade</strong>：（Compiler）</p> <ol><li>知道哪些子系统类负责处理请求；</li> <li>将客户的请求代理给适当的子系统对象；</li></ol> <p><strong>Subsystem classes</strong>：（Scanner、Parser）</p> <ol><li>实现子系统的功能；</li> <li>处理由Facade对象指派的任务；</li> <li>没有Facade的然和相关信息（即没有Facade的指针)；</li></ol> <h2 id="_5-简单的示例代码"><a href="#_5-简单的示例代码" class="header-anchor">#</a> 5 简单的示例代码</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">//Facade.h</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;SystemC.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;SystemA.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;SystemB.h&quot;</span></span>
+<span class="token keyword">class</span> <span class="token class-name">Facade</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+	<span class="token function">Facade</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Facade</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">void</span> <span class="token function">wrapOpration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+	SystemC <span class="token operator">*</span>m_SystemC<span class="token punctuation">;</span>
+	SystemA <span class="token operator">*</span>m_SystemA<span class="token punctuation">;</span>
+	SystemB <span class="token operator">*</span>m_SystemB<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">//Facade.c</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;Facade.h&quot;</span></span>
+<span class="token class-name">Facade</span><span class="token double-colon punctuation">::</span><span class="token function">Facade</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	m_SystemA  <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">SystemA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	m_SystemB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">SystemB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	m_SystemC <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">SystemC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token class-name">Facade</span><span class="token double-colon punctuation">::</span><span class="token operator">~</span><span class="token function">Facade</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">delete</span> m_SystemA<span class="token punctuation">;</span>
+	<span class="token keyword">delete</span> m_SystemB<span class="token punctuation">;</span>
+	<span class="token keyword">delete</span> m_SystemC<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token class-name">Facade</span><span class="token double-colon punctuation">::</span><span class="token function">wrapOpration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	m_SystemA<span class="token operator">-&gt;</span><span class="token function">operationA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	m_SystemB<span class="token operator">-&gt;</span><span class="token function">operationB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	m_SystemC<span class="token operator">-&gt;</span><span class="token function">opeartionC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">//main.c</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;Facade.h&quot;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	Facade fa<span class="token punctuation">;</span>
+	fa<span class="token punctuation">.</span><span class="token function">wrapOpration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>operationA<span class="token punctuation">(</span><span class="token punctuation">)</span>
+operationB<span class="token punctuation">(</span><span class="token punctuation">)</span>
+operationC<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_6-总结"><a href="#_6-总结" class="header-anchor">#</a> 6 总结</h2> <p><strong>优点</strong>：</p> <ol><li>对客户屏蔽子系统组件，减少了客户处理的对象数目并使得子系统使用起来更加容易；</li> <li>实现子系统与客户间的松耦合，子系统组件变化不影响到它的客户类，只需调整外观类；</li> <li>降低了大型软件系统中的编译依赖性，简化了系统在不同平台的移植过程。编译一个子系统不需要编译其他子系统；修改一个子系统不影响其他子系统；子系统内部变化也不会影响到外观对象。</li> <li>只是提供了一个访问子系统的统一入口，并不影响用户直接使用子系统类。</li></ol> <p><strong>缺点</strong>：</p> <ol><li>不能很好地限制客户使用子系统类，如果对客户访问子系统类做太多的限制则减少了可变性和灵活性；</li> <li>在不引入抽象外观类的情况下，增加新的子系统可能需要修改外观类或客户端的源代码，违背了“开闭原则”；</li></ol> <p><strong>应用场景</strong>：</p> <ol><li>希望为复杂子系统提供一个简单接口，该接口可以满足大多数用户的需求，而且用户也可以越过外观类直接访问子系统；</li> <li>希望将子系统与客户以及其他子系统解耦，或者在层次化结构中，降低层之间的耦合；</li></ol></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div> <ul class="side-bar sub-sidebar-wrapper" style="width:12rem;" data-v-ac050c62><li class="level-2" data-v-ac050c62><a href="/Blog/DesignPatterns/facade.html#_1-前言" class="sidebar-link reco-side-_1-前言" data-v-ac050c62>1 前言</a></li><li class="level-2" data-v-ac050c62><a href="/Blog/DesignPatterns/facade.html#_2-外观模式" class="sidebar-link reco-side-_2-外观模式" data-v-ac050c62>2 外观模式</a></li><li class="level-2" data-v-ac050c62><a href="/Blog/DesignPatterns/facade.html#_3-实际例子" class="sidebar-link reco-side-_3-实际例子" data-v-ac050c62>3 实际例子</a></li><li class="level-2" data-v-ac050c62><a href="/Blog/DesignPatterns/facade.html#_4-结构与参与者" class="sidebar-link reco-side-_4-结构与参与者" data-v-ac050c62>4 结构与参与者</a></li><li class="level-2" data-v-ac050c62><a href="/Blog/DesignPatterns/facade.html#_5-简单的示例代码" class="sidebar-link reco-side-_5-简单的示例代码" data-v-ac050c62>5 简单的示例代码</a></li><li class="level-2" data-v-ac050c62><a href="/Blog/DesignPatterns/facade.html#_6-总结" class="sidebar-link reco-side-_6-总结" data-v-ac050c62>6 总结</a></li></ul></main></div> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.7f7d5479.js" defer></script><script src="/assets/js/3.6b2b6a96.js" defer></script><script src="/assets/js/1.7736d492.js" defer></script><script src="/assets/js/38.1e705c1e.js" defer></script>
+  </body>
+</html>
