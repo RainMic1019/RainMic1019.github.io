@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C++并发与多线程笔记一：基本概念和用法 | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js"></script>
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7eaaf838.css" as="style"><link rel="preload" href="/assets/js/app.389323ad.js" as="script"><link rel="preload" href="/assets/js/3.8cd7b294.js" as="script"><link rel="preload" href="/assets/js/1.2acc022b.js" as="script"><link rel="preload" href="/assets/js/89.0baa310a.js" as="script"><link rel="prefetch" href="/assets/js/10.509ef012.js"><link rel="prefetch" href="/assets/js/100.87b48422.js"><link rel="prefetch" href="/assets/js/101.26b12fac.js"><link rel="prefetch" href="/assets/js/102.7bb41561.js"><link rel="prefetch" href="/assets/js/103.9625cf57.js"><link rel="prefetch" href="/assets/js/104.656f8f66.js"><link rel="prefetch" href="/assets/js/105.01e163d8.js"><link rel="prefetch" href="/assets/js/11.c2055ebb.js"><link rel="prefetch" href="/assets/js/12.5b98e285.js"><link rel="prefetch" href="/assets/js/13.da357cb6.js"><link rel="prefetch" href="/assets/js/14.14359ca8.js"><link rel="prefetch" href="/assets/js/15.3f13fc82.js"><link rel="prefetch" href="/assets/js/16.7f349b92.js"><link rel="prefetch" href="/assets/js/17.dfbfd566.js"><link rel="prefetch" href="/assets/js/18.c5da041e.js"><link rel="prefetch" href="/assets/js/19.0f9638df.js"><link rel="prefetch" href="/assets/js/20.ebb7267b.js"><link rel="prefetch" href="/assets/js/21.01453e44.js"><link rel="prefetch" href="/assets/js/22.dd08b5d9.js"><link rel="prefetch" href="/assets/js/23.59d3ba1f.js"><link rel="prefetch" href="/assets/js/24.b4851731.js"><link rel="prefetch" href="/assets/js/25.8fe447e5.js"><link rel="prefetch" href="/assets/js/26.ba72535f.js"><link rel="prefetch" href="/assets/js/27.d78e5a7f.js"><link rel="prefetch" href="/assets/js/28.869cfdab.js"><link rel="prefetch" href="/assets/js/29.94d6c0da.js"><link rel="prefetch" href="/assets/js/30.4d578f75.js"><link rel="prefetch" href="/assets/js/31.b176b736.js"><link rel="prefetch" href="/assets/js/32.b0e5c692.js"><link rel="prefetch" href="/assets/js/33.50670ab7.js"><link rel="prefetch" href="/assets/js/34.ca843b26.js"><link rel="prefetch" href="/assets/js/35.9d0a871d.js"><link rel="prefetch" href="/assets/js/36.058658f5.js"><link rel="prefetch" href="/assets/js/37.79702756.js"><link rel="prefetch" href="/assets/js/38.3becf2a9.js"><link rel="prefetch" href="/assets/js/39.ce9c4993.js"><link rel="prefetch" href="/assets/js/4.7234e624.js"><link rel="prefetch" href="/assets/js/40.63f404db.js"><link rel="prefetch" href="/assets/js/41.055093b0.js"><link rel="prefetch" href="/assets/js/42.fdac0499.js"><link rel="prefetch" href="/assets/js/43.eccc4bc3.js"><link rel="prefetch" href="/assets/js/44.15c550df.js"><link rel="prefetch" href="/assets/js/45.e1f3a91a.js"><link rel="prefetch" href="/assets/js/46.2f663949.js"><link rel="prefetch" href="/assets/js/47.e414f8b4.js"><link rel="prefetch" href="/assets/js/48.33742d27.js"><link rel="prefetch" href="/assets/js/49.39d768fb.js"><link rel="prefetch" href="/assets/js/5.c5df887a.js"><link rel="prefetch" href="/assets/js/50.6f7b21d1.js"><link rel="prefetch" href="/assets/js/51.dd0d4797.js"><link rel="prefetch" href="/assets/js/52.d6b486de.js"><link rel="prefetch" href="/assets/js/53.a375da01.js"><link rel="prefetch" href="/assets/js/54.286f4db9.js"><link rel="prefetch" href="/assets/js/55.4eca20c6.js"><link rel="prefetch" href="/assets/js/56.3e29c0fe.js"><link rel="prefetch" href="/assets/js/57.ba66cfdf.js"><link rel="prefetch" href="/assets/js/58.9ab4c356.js"><link rel="prefetch" href="/assets/js/59.f4a92ca7.js"><link rel="prefetch" href="/assets/js/6.c5c0e212.js"><link rel="prefetch" href="/assets/js/60.25abd7f9.js"><link rel="prefetch" href="/assets/js/61.7152649d.js"><link rel="prefetch" href="/assets/js/62.9c19bfc5.js"><link rel="prefetch" href="/assets/js/63.b414f496.js"><link rel="prefetch" href="/assets/js/64.58bc0c9c.js"><link rel="prefetch" href="/assets/js/65.b593055b.js"><link rel="prefetch" href="/assets/js/66.4eb75485.js"><link rel="prefetch" href="/assets/js/67.a110db76.js"><link rel="prefetch" href="/assets/js/68.f4bbae0a.js"><link rel="prefetch" href="/assets/js/69.532ecaf5.js"><link rel="prefetch" href="/assets/js/7.54ced24c.js"><link rel="prefetch" href="/assets/js/70.4a3e45cb.js"><link rel="prefetch" href="/assets/js/71.37d0cbc5.js"><link rel="prefetch" href="/assets/js/72.c19ed0ab.js"><link rel="prefetch" href="/assets/js/73.1e1c5639.js"><link rel="prefetch" href="/assets/js/74.a495e734.js"><link rel="prefetch" href="/assets/js/75.36ed645a.js"><link rel="prefetch" href="/assets/js/76.4eb141f1.js"><link rel="prefetch" href="/assets/js/77.dea7ff9d.js"><link rel="prefetch" href="/assets/js/78.d77bc99b.js"><link rel="prefetch" href="/assets/js/79.e4856393.js"><link rel="prefetch" href="/assets/js/8.e62f1843.js"><link rel="prefetch" href="/assets/js/80.fd65c7a5.js"><link rel="prefetch" href="/assets/js/81.7754f641.js"><link rel="prefetch" href="/assets/js/82.9ab18ada.js"><link rel="prefetch" href="/assets/js/83.06c080f6.js"><link rel="prefetch" href="/assets/js/84.3b801bcb.js"><link rel="prefetch" href="/assets/js/85.f90e359b.js"><link rel="prefetch" href="/assets/js/86.5ae50729.js"><link rel="prefetch" href="/assets/js/87.1fe37ed2.js"><link rel="prefetch" href="/assets/js/88.47071570.js"><link rel="prefetch" href="/assets/js/9.fd63a988.js"><link rel="prefetch" href="/assets/js/90.714224f5.js"><link rel="prefetch" href="/assets/js/91.fbc0997e.js"><link rel="prefetch" href="/assets/js/92.c1c0a549.js"><link rel="prefetch" href="/assets/js/93.9870265b.js"><link rel="prefetch" href="/assets/js/94.ff12a7de.js"><link rel="prefetch" href="/assets/js/95.976ae2f6.js"><link rel="prefetch" href="/assets/js/96.41f2642f.js"><link rel="prefetch" href="/assets/js/97.65fe8305.js"><link rel="prefetch" href="/assets/js/98.3a87e365.js"><link rel="prefetch" href="/assets/js/99.cc9e61ce.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7eaaf838.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>89</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>24</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#67cc86;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>C++并发与多线程笔记一：基本概念和用法</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">C++并发与多线程笔记一：基本概念和用法</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2022/3/6</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/blog/programDesign/cpp_multithreading_1.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>C++</span><span class="tag-item" data-v-8a445198>并发</span><span class="tag-item" data-v-8a445198>多线程</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-基本概念"><a href="#_1-基本概念" class="header-anchor">#</a> 1 基本概念</h2> <h3 id="_1-1-并发、进程、线程"><a href="#_1-1-并发、进程、线程" class="header-anchor">#</a> 1.1 并发、进程、线程</h3> <h4 id="_1-1-1-并发"><a href="#_1-1-1-并发" class="header-anchor">#</a> 1.1.1 并发</h4> <p>并发是指两个或者更多的任务（独立的活动）同时发生（进行）：<strong>一个程序同时执行多个独立的任务</strong>。</p> <p>以往的计算机通常是单核cpu，某一个时刻只能执行一个任务，此时由操作系统调度实现并发，即每秒钟进行多次所谓的“任务切换”，<strong>造成并发的假象</strong>，这种切换（上下文切换）存在时间开销，比如操作系统需要保存切换时的各种状态、执行进度等信息，并且切换回来时好需要复原这些信息。</p> <p>随着硬件的发展，出现了多处理器计算机，用于服务器和高新能计算领域，比如一块芯片上有个核心（cpu）：双核、4核、8核等等，它们能实现真正的并行执行多个任务（<strong>硬件并发</strong>）。</p> <p>使用并发的目的：可以同时干多个事，提高性能。</p> <h4 id="_1-1-2-进程"><a href="#_1-1-2-进程" class="header-anchor">#</a> 1.1.2 进程</h4> <p>在了解进程之前，首先需要知道什么叫程序，<strong>程序是指令、数据及其组织形式的描述，而进程就是程序的实体</strong>。</p> <p>简单理解，一个可执行程序运行起来了，就叫创建了一个进程。进程就是运行起来的可执行程序。</p> <h4 id="_1-1-3-线程"><a href="#_1-1-3-线程" class="header-anchor">#</a> 1.1.3 线程</h4> <p>每个进程，都有唯一的一个主线程。执行可执行程序产生一个进程后，这个主线程就随着这个进程默默启动起来了。</p> <p><strong>线程</strong>：是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。</p> <p>简单理解，线程就是用来执行代码的，可以理解为一条代码的执行通路。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">/* 主线程启动时执行main()函数 */</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* 各种代码 */</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/* 
+ * 主线程执行完main()函数return后，表示整个进程允许完毕，
+ * 此时主线程结束运行，整个进程也结束运行。
+ */</span>
+</code></pre></div><p>主线程由系统创建，除了它之外，可以通过写代码来创建其他线程，其他线程走的是别的道路，甚至去不同的地方。</p> <p>每创建一个新线程，就可以在同一时刻，多干一个不同的事（多走一条不同的代码执行路径）。</p> <p>程序中同时运行多个线程时，即实现了并发，但线程并不是越多越好，每个线程，都需要一个独立的堆栈空间，线程之间的切换要保存很多中间状态，会耗费本该属于程序运行的时间。</p> <h3 id="_1-2-并发的实现方法"><a href="#_1-2-并发的实现方法" class="header-anchor">#</a> 1.2 并发的实现方法</h3> <p>实现并发的手段：</p> <ul><li>通过多个进程实现并发</li> <li>在一个进程中，创建多个线程实现并发</li></ul> <h4 id="_1-2-1-多进程并发"><a href="#_1-2-1-多进程并发" class="header-anchor">#</a> 1.2.1 多进程并发</h4> <ul><li>比如账号服务器一个进程，游戏服务器一个进程，二者之间存在通信；</li> <li>服务器进程之间存在通信，比如同一电脑下的管道，文件，消息队列，共享内存等；不同电脑下的 socket 通信等。</li></ul> <h4 id="_1-2-2-多线程并发"><a href="#_1-2-2-多线程并发" class="header-anchor">#</a> 1.2.2 多线程并发</h4> <p><strong>线程</strong>：感觉像是轻量级的进程。每个进程有自己独立的运行路径，但一个进程中的所有线程共享地址空间（共享内存），全局变量、全局内存、全局引用都可以在线程之间传递，所以多线程开销远远小于多进程，但这也会引入一个新问题：数据一致性问题。</p> <p>多进程并发和多线程并发可以混合使用，但通常优先考虑多线程技术。</p> <blockquote><p>备注：使用多线程并发时，创建线程的数量最大不建议超过 200-300个，至于多少合适，需要根据实际项目情况进行调整，有时线程数量过多反而会导致效率降低。</p></blockquote> <h4 id="_1-2-3-总结"><a href="#_1-2-3-总结" class="header-anchor">#</a> 1.2.3 总结</h4> <p>和进程比，线程的优点如下：</p> <ol><li>线程启动速度更快，更轻量级；</li> <li>系统资源开销更少，执行速度更快，比如共享内存这种通信方式比任何其他的通信方式都快。</li></ol> <p>缺点：使用有一定难度，要小心处理数据的一致性问题。</p> <h3 id="_1-3-c-11新标准线程库"><a href="#_1-3-c-11新标准线程库" class="header-anchor">#</a> 1.3 C++11新标准线程库</h3> <p>以往的多线程代码通常调用系统平台提供的接口实现，不能跨平台运行，比如在 Windows 平台创建线程使用 CreateThread() 接口，但 Linux 平台则使用 pthread_create() 接口。</p> <p>当然，使用 POSIX thread（pthread）库也可以实现跨平台，但需要在不同的平台上进行配置，用起来也不是特别方便。</p> <p><strong>从 C++ 11 标准开始，C++语言本身增加了对多线程的支持</strong>，意味着增强了可移植性（跨平台），减少了开发人员的工作量。</p> <h2 id="_2-c-线程基本用法"><a href="#_2-c-线程基本用法" class="header-anchor">#</a> 2 C++线程基本用法</h2> <h3 id="_2-1-线程运行的开始和结束"><a href="#_2-1-线程运行的开始和结束" class="header-anchor">#</a> 2.1 线程运行的开始和结束</h3> <ul><li>程序运行起来，生成一个进程，该进程所属的主线程开始自动运行；当主线程从main()函数返回，则整个进程执行完毕。</li> <li>主线程从main()开始执行，那么我们自己创建的线程，也需要从一个函数开始运行（初始函数），一旦这个函数运行完毕，线程也结束运行。</li> <li>整个进程是否执行完毕的标志是<strong>主线程是否执行完</strong>，如果主线程执行完毕就代表整个进程执行完毕了，<strong>此时如果其他子线程还没有执行完，也会被强行终止</strong>。</li></ul> <p>准备工作：</p> <ol><li>添加头文件 thread.h。</li> <li>添加 std 命名空间。</li> <li>定义一个线程入口函数。</li></ol> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token comment">/* 线程入口函数 */</span>
+<span class="token keyword">void</span> <span class="token function">myThreadEntry</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;My thread start!!!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token comment">/* 线程执行代码 */</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;My thread end!!!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="_2-1-1-thread"><a href="#_2-1-1-thread" class="header-anchor">#</a> 2.1.1 thread()</h4> <p>创建一个线程对象：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token comment">/* 创建一个thread对象， 并以myThreadEntry()作为线程入口函数 */</span>
+	<span class="token comment">/* 其中myThreadEntry是可执行对象（函数指针） */</span>
+    thread <span class="token function">newThread</span><span class="token punctuation">(</span>myThreadEntry<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>备注：线程类（thread类）参数是一个可调用对象。一组可执行的语句称为可调用对象，C++中的可调用对象可以是函数、函数指针、lambda表达式、bind创建的对象或者重载了函数调用运算符的类对象。</p></blockquote> <h4 id="_2-1-2-join"><a href="#_2-1-2-join" class="header-anchor">#</a> 2.1.2 join()</h4> <p>等待线程执行执行完毕：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    thread <span class="token function">newThread</span><span class="token punctuation">(</span>myThreadEntry<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* 阻塞主线程，等待子线程执行完毕 */</span>
+	<span class="token comment">/* 当myThreadEntry执行完毕，join()就执行完毕，主线程继续往下执行 */</span>
+	newThread<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>My thread start<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+My thread end<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+</code></pre></div><h4 id="_2-1-3-detach"><a href="#_2-1-3-detach" class="header-anchor">#</a> 2.1.3 detach()</h4> <p>传统多线程程序主线程必须等待子线程执行完毕后，自己才能最终退出，但 C++11 中提供了 detach() 接口，它用于分离主线程和子线程，即主线程不必等待子线程运行结束，主线程是否退出不影响子线程的运行。</p> <p>一旦 detach() 之后，与主线程关联的thread对象就会失去与主线的关联（变成孤儿），此时这个子线程就会驻留在后台运行，这个子线程就相当于被C++运行时库接管了，当这个子线程运行完成后，由运行时库负责清理该线程相关的资源（守护线程）。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    thread <span class="token function">newThread</span><span class="token punctuation">(</span>myThreadEntry<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* 分离主线程与子线程 */</span>
+	<span class="token comment">/* 子线程驻留在后台运行，被C++运行时库接管 */</span>
+	newThread<span class="token punctuation">.</span><span class="token function">detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>Hello World<span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+My thread start<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+My thread end<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+</code></pre></div><blockquote><p>备注：主线程和子线程分离后，输出结果交替打印，且每次运行的输出结果都不一样。</p></blockquote> <p>一旦调用 detach()，就不能对子线程使用 join() 了。detach() 使我们完全失去了对子线程的控制，因此不建议这样用，还是调用 join() 正常等待子线程退出更加安全可靠谱。</p> <h4 id="_2-1-4-joinable"><a href="#_2-1-4-joinable" class="header-anchor">#</a> 2.1.4 joinable()</h4> <p>判断是否可以成功使用 join() 或者 detach()。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    thread <span class="token function">newThread</span><span class="token punctuation">(</span>myThreadEntry<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+    <span class="token comment">/* 如果返回true，证明可以调用join()或者detach() */</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>newThread<span class="token punctuation">.</span><span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1.joinable() == true&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1.joinable() == false&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	newThread<span class="token punctuation">.</span><span class="token function">detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+    <span class="token comment">/* 如果返回false，证明调用过join()或detach()，二者都不能再调用了 */</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>newThread<span class="token punctuation">.</span><span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;2.joinable() == true&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;2.joinable() == false&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">1</span>.joinable<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">true</span>
+<span class="token number">2</span>.joinable<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span>
+</code></pre></div><h3 id="_2-2-其他创建线程的方法"><a href="#_2-2-其他创建线程的方法" class="header-anchor">#</a> 2.2 其他创建线程的方法</h3> <h4 id="_2-2-1-用类"><a href="#_2-2-1-用类" class="header-anchor">#</a> 2.2.1 用类</h4> <p>定义一个TA类型，并重载一个无参数的()操作，<strong>让其变成一个可调用对象</strong>：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token comment">/* 定义TA类 */</span>
+<span class="token keyword">class</span> <span class="token class-name">TA</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+	<span class="token keyword">void</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">/* 重载()操作（无参数） */</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;My thread start!!!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		<span class="token comment">/* 线程执行代码 */</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;My thread end!!!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	TA ta<span class="token punctuation">;</span>                <span class="token comment">/* 声明TA类对象 */</span>
+	thread <span class="token function">newThread</span><span class="token punctuation">(</span>ta<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* ta：可调用对象 */</span>
+	newThread<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">/* 等待newThrad执行完毕 */</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>My thread start<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+My thread end<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+</code></pre></div><p><strong>一个使用 detach() 的坑：</strong></p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">TA</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span>m_i<span class="token punctuation">;</span>             <span class="token comment">/* 定义一个应用 */</span>
+	<span class="token function">TA</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>i<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">m_i</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">/* 创建TA对象时需传入一个引用值 */</span>
+	<span class="token keyword">void</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	    <span class="token comment">/* 主线程结束后，局部变量my_i值已被释放 */</span>
+	    <span class="token comment">/* 而m_i是my_i的引用，此时将产生不可预料的后果 */</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> 
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;2.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;3.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;4.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;5.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;6.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token keyword">int</span> my_i <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span> 
+	TA <span class="token function">ta</span><span class="token punctuation">(</span>my_i<span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">/* 声明TA类对象 */</span>
+	thread <span class="token function">newThread</span><span class="token punctuation">(</span>ta<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* ta：可调用对象 */</span>
+	newThread<span class="token punctuation">.</span><span class="token function">detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">/* 分离主线程和子线程 */</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>问题一</strong>：调用detach()分离了主线程与子线程后，它们将分别独立运行，当主线程结束后,，局部变量 my_i 将被回收释放，此时子线程中的 m_i 引用了 my_i，这个值就是个无效的值，无法预料会有什么结果。</p> <p><strong>问题二</strong>：在主线程中，ta也是局部变量，主线程运行完毕，按常理来说，ta对象也被释放了，为什么调用detach()后子线程还能正常运行呢？</p> <p>首先，主线程运行完毕后，ta对象肯定是不在了，但是这个对象不在了也没关系，因为这个对象实际上是被<strong>复制</strong>到线程中去的，所以执行完主线程后，ta对象会被销毁，但是所复制的ta对象依旧存在。</p> <p>只要TA类对象里没有引用、没有指针，那么就不会产生问题。</p> <p>验证代码：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">TA</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span>m_i<span class="token punctuation">;</span>
+	<span class="token function">TA</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>i<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">m_i</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;TA()构造函数被执行&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token function">TA</span><span class="token punctuation">(</span><span class="token keyword">const</span> TA <span class="token operator">&amp;</span>ta<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">m_i</span><span class="token punctuation">(</span>ta<span class="token punctuation">.</span>m_i<span class="token punctuation">)</span><span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;TA()拷贝构造函数被执行&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token operator">~</span><span class="token function">TA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;~TA()析构函数被执行&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">void</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;2.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;3.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;4.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;5.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;6.m_i = &quot;</span> <span class="token operator">&lt;&lt;</span> m_i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token keyword">int</span> my_i <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span> 
+	TA <span class="token function">ta</span><span class="token punctuation">(</span>my_i<span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">/* 调用TA构造函数 */</span>
+	thread <span class="token function">newThread</span><span class="token punctuation">(</span>ta<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 调用TA拷贝构造函数 */</span>
+	newThread<span class="token punctuation">.</span><span class="token function">detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">/* 分离主线程和子线程 */</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>TA<span class="token punctuation">(</span><span class="token punctuation">)</span>构造函数被执行
+TA<span class="token punctuation">(</span><span class="token punctuation">)</span>拷贝构造函数被执行
+Hello World<span class="token operator">!</span>
+~TA<span class="token punctuation">(</span><span class="token punctuation">)</span>析构函数被执行
+</code></pre></div><p>将 detach() 换成 join() 之后的输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>TA<span class="token punctuation">(</span><span class="token punctuation">)</span>构造函数被执行
+TA<span class="token punctuation">(</span><span class="token punctuation">)</span>拷贝构造函数被执行
+<span class="token number">1</span>.m_i <span class="token operator">=</span> <span class="token number">6</span>
+<span class="token number">2</span>.m_i <span class="token operator">=</span> <span class="token number">6</span>
+<span class="token number">3</span>.m_i <span class="token operator">=</span> <span class="token number">6</span>
+<span class="token number">4</span>.m_i <span class="token operator">=</span> <span class="token number">6</span>
+<span class="token number">5</span>.m_i <span class="token operator">=</span> <span class="token number">6</span>
+<span class="token number">6</span>.m_i <span class="token operator">=</span> <span class="token number">6</span>
+~TA<span class="token punctuation">(</span><span class="token punctuation">)</span>析构函数被执行
+Hello World<span class="token operator">!</span>
+~TA<span class="token punctuation">(</span><span class="token punctuation">)</span>析构函数被执行
+</code></pre></div><p><strong>可以看出 join() 中释放了深度拷贝到子线程中的 ta 对象。</strong></p> <h4 id="_2-2-2-用lambda表达式"><a href="#_2-2-2-用lambda表达式" class="header-anchor">#</a> 2.2.2 用lambda表达式</h4> <p>使用lambda表达式创建线程的示例代码如下：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token keyword">auto</span> myLamThread <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;My thread start!!!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		<span class="token comment">/* 线程执行代码 */</span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;My thread end!!!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+	thread <span class="token function">newThread</span><span class="token punctuation">(</span>myLamThread<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* myLamThread：可调用对象 */</span>
+	newThread<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>              <span class="token comment">/* 等待线程结束 */</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>My thread start<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+My thread end<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+Hello World<span class="token operator">!</span>
+</code></pre></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_1.html#_1-基本概念" class="sidebar-link reco-side-_1-基本概念" data-v-b57cc07c>1 基本概念</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_1.html#_1-1-并发、进程、线程" class="sidebar-link reco-side-_1-1-并发、进程、线程" data-v-b57cc07c>1.1 并发、进程、线程</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_1.html#_1-2-并发的实现方法" class="sidebar-link reco-side-_1-2-并发的实现方法" data-v-b57cc07c>1.2 并发的实现方法</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_1.html#_1-3-c-11新标准线程库" class="sidebar-link reco-side-_1-3-c-11新标准线程库" data-v-b57cc07c>1.3 C++11新标准线程库</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_1.html#_2-c-线程基本用法" class="sidebar-link reco-side-_2-c-线程基本用法" data-v-b57cc07c>2 C++线程基本用法</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_1.html#_2-1-线程运行的开始和结束" class="sidebar-link reco-side-_2-1-线程运行的开始和结束" data-v-b57cc07c>2.1 线程运行的开始和结束</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_1.html#_2-2-其他创建线程的方法" class="sidebar-link reco-side-_2-2-其他创建线程的方法" data-v-b57cc07c>2.2 其他创建线程的方法</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.389323ad.js" defer></script><script src="/assets/js/3.8cd7b294.js" defer></script><script src="/assets/js/1.2acc022b.js" defer></script><script src="/assets/js/89.0baa310a.js" defer></script>
+  </body>
+</html>

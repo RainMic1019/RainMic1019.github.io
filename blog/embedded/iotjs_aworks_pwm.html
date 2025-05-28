@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>IOT.js适配AWorks平台通用外设接口（4）：PWM | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js"></script>
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7eaaf838.css" as="style"><link rel="preload" href="/assets/js/app.389323ad.js" as="script"><link rel="preload" href="/assets/js/3.8cd7b294.js" as="script"><link rel="preload" href="/assets/js/1.2acc022b.js" as="script"><link rel="preload" href="/assets/js/75.36ed645a.js" as="script"><link rel="prefetch" href="/assets/js/10.509ef012.js"><link rel="prefetch" href="/assets/js/100.87b48422.js"><link rel="prefetch" href="/assets/js/101.26b12fac.js"><link rel="prefetch" href="/assets/js/102.7bb41561.js"><link rel="prefetch" href="/assets/js/103.9625cf57.js"><link rel="prefetch" href="/assets/js/104.656f8f66.js"><link rel="prefetch" href="/assets/js/105.01e163d8.js"><link rel="prefetch" href="/assets/js/11.c2055ebb.js"><link rel="prefetch" href="/assets/js/12.5b98e285.js"><link rel="prefetch" href="/assets/js/13.da357cb6.js"><link rel="prefetch" href="/assets/js/14.14359ca8.js"><link rel="prefetch" href="/assets/js/15.3f13fc82.js"><link rel="prefetch" href="/assets/js/16.7f349b92.js"><link rel="prefetch" href="/assets/js/17.dfbfd566.js"><link rel="prefetch" href="/assets/js/18.c5da041e.js"><link rel="prefetch" href="/assets/js/19.0f9638df.js"><link rel="prefetch" href="/assets/js/20.ebb7267b.js"><link rel="prefetch" href="/assets/js/21.01453e44.js"><link rel="prefetch" href="/assets/js/22.dd08b5d9.js"><link rel="prefetch" href="/assets/js/23.59d3ba1f.js"><link rel="prefetch" href="/assets/js/24.b4851731.js"><link rel="prefetch" href="/assets/js/25.8fe447e5.js"><link rel="prefetch" href="/assets/js/26.ba72535f.js"><link rel="prefetch" href="/assets/js/27.d78e5a7f.js"><link rel="prefetch" href="/assets/js/28.869cfdab.js"><link rel="prefetch" href="/assets/js/29.94d6c0da.js"><link rel="prefetch" href="/assets/js/30.4d578f75.js"><link rel="prefetch" href="/assets/js/31.b176b736.js"><link rel="prefetch" href="/assets/js/32.b0e5c692.js"><link rel="prefetch" href="/assets/js/33.50670ab7.js"><link rel="prefetch" href="/assets/js/34.ca843b26.js"><link rel="prefetch" href="/assets/js/35.9d0a871d.js"><link rel="prefetch" href="/assets/js/36.058658f5.js"><link rel="prefetch" href="/assets/js/37.79702756.js"><link rel="prefetch" href="/assets/js/38.3becf2a9.js"><link rel="prefetch" href="/assets/js/39.ce9c4993.js"><link rel="prefetch" href="/assets/js/4.7234e624.js"><link rel="prefetch" href="/assets/js/40.63f404db.js"><link rel="prefetch" href="/assets/js/41.055093b0.js"><link rel="prefetch" href="/assets/js/42.fdac0499.js"><link rel="prefetch" href="/assets/js/43.eccc4bc3.js"><link rel="prefetch" href="/assets/js/44.15c550df.js"><link rel="prefetch" href="/assets/js/45.e1f3a91a.js"><link rel="prefetch" href="/assets/js/46.2f663949.js"><link rel="prefetch" href="/assets/js/47.e414f8b4.js"><link rel="prefetch" href="/assets/js/48.33742d27.js"><link rel="prefetch" href="/assets/js/49.39d768fb.js"><link rel="prefetch" href="/assets/js/5.c5df887a.js"><link rel="prefetch" href="/assets/js/50.6f7b21d1.js"><link rel="prefetch" href="/assets/js/51.dd0d4797.js"><link rel="prefetch" href="/assets/js/52.d6b486de.js"><link rel="prefetch" href="/assets/js/53.a375da01.js"><link rel="prefetch" href="/assets/js/54.286f4db9.js"><link rel="prefetch" href="/assets/js/55.4eca20c6.js"><link rel="prefetch" href="/assets/js/56.3e29c0fe.js"><link rel="prefetch" href="/assets/js/57.ba66cfdf.js"><link rel="prefetch" href="/assets/js/58.9ab4c356.js"><link rel="prefetch" href="/assets/js/59.f4a92ca7.js"><link rel="prefetch" href="/assets/js/6.c5c0e212.js"><link rel="prefetch" href="/assets/js/60.25abd7f9.js"><link rel="prefetch" href="/assets/js/61.7152649d.js"><link rel="prefetch" href="/assets/js/62.9c19bfc5.js"><link rel="prefetch" href="/assets/js/63.b414f496.js"><link rel="prefetch" href="/assets/js/64.58bc0c9c.js"><link rel="prefetch" href="/assets/js/65.b593055b.js"><link rel="prefetch" href="/assets/js/66.4eb75485.js"><link rel="prefetch" href="/assets/js/67.a110db76.js"><link rel="prefetch" href="/assets/js/68.f4bbae0a.js"><link rel="prefetch" href="/assets/js/69.532ecaf5.js"><link rel="prefetch" href="/assets/js/7.54ced24c.js"><link rel="prefetch" href="/assets/js/70.4a3e45cb.js"><link rel="prefetch" href="/assets/js/71.37d0cbc5.js"><link rel="prefetch" href="/assets/js/72.c19ed0ab.js"><link rel="prefetch" href="/assets/js/73.1e1c5639.js"><link rel="prefetch" href="/assets/js/74.a495e734.js"><link rel="prefetch" href="/assets/js/76.4eb141f1.js"><link rel="prefetch" href="/assets/js/77.dea7ff9d.js"><link rel="prefetch" href="/assets/js/78.d77bc99b.js"><link rel="prefetch" href="/assets/js/79.e4856393.js"><link rel="prefetch" href="/assets/js/8.e62f1843.js"><link rel="prefetch" href="/assets/js/80.fd65c7a5.js"><link rel="prefetch" href="/assets/js/81.7754f641.js"><link rel="prefetch" href="/assets/js/82.9ab18ada.js"><link rel="prefetch" href="/assets/js/83.06c080f6.js"><link rel="prefetch" href="/assets/js/84.3b801bcb.js"><link rel="prefetch" href="/assets/js/85.f90e359b.js"><link rel="prefetch" href="/assets/js/86.5ae50729.js"><link rel="prefetch" href="/assets/js/87.1fe37ed2.js"><link rel="prefetch" href="/assets/js/88.47071570.js"><link rel="prefetch" href="/assets/js/89.0baa310a.js"><link rel="prefetch" href="/assets/js/9.fd63a988.js"><link rel="prefetch" href="/assets/js/90.714224f5.js"><link rel="prefetch" href="/assets/js/91.fbc0997e.js"><link rel="prefetch" href="/assets/js/92.c1c0a549.js"><link rel="prefetch" href="/assets/js/93.9870265b.js"><link rel="prefetch" href="/assets/js/94.ff12a7de.js"><link rel="prefetch" href="/assets/js/95.976ae2f6.js"><link rel="prefetch" href="/assets/js/96.41f2642f.js"><link rel="prefetch" href="/assets/js/97.65fe8305.js"><link rel="prefetch" href="/assets/js/98.3a87e365.js"><link rel="prefetch" href="/assets/js/99.cc9e61ce.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7eaaf838.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>89</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>24</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#67cc86;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>IOT.js适配AWorks平台通用外设接口（4）：PWM</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">IOT.js适配AWorks平台通用外设接口（4）：PWM</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2022/4/18</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/blog/embedded/iotjs_aworks_pwm.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>C</span><span class="tag-item" data-v-8a445198>嵌入式</span><span class="tag-item" data-v-8a445198>AWorks</span><span class="tag-item" data-v-8a445198>IOT.js</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1 前言</h2> <p>近期因工作需求学习了一下 IOT.js 和 AWorks 平台通用外设接口（包括：ADC、GPIO、I2C、PWM、SPI 和 UART），并将它们逐一适配到 IOT.js 中，为后续 <a href="https://github.com/zlgopen/awtk-mvvm" target="_blank" rel="noopener noreferrer">AWTK-MVMM<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 的 JS项目支持平台外设调用奠定基础，此处做笔记记录一下。</p> <ul><li><a href="/blog/embedded/iotjs_aworks_adc.html">IOT.js适配AWorks平台通用外设接口（1）：ADC</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_gpio.html">IOT.js适配AWorks平台通用外设接口（2）：GPIO</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_i2c.html">IOT.js适配AWorks平台通用外设接口（3）：I2C</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_pwm.html" aria-current="page" class="router-link-exact-active router-link-active">IOT.js适配AWorks平台通用外设接口（4）：PWM</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_spi.html">IOT.js适配AWorks平台通用外设接口（5）：SPI</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_uart.html">IOT.js适配AWorks平台通用外设接口（6）：UART</a>；</li></ul> <blockquote><p>备注：IOT.js 和 AWorks 的相关介绍请看第一篇 ADC 适配笔记。</p></blockquote> <h2 id="_2-pwm"><a href="#_2-pwm" class="header-anchor">#</a> 2 PWM</h2> <h3 id="_2-1-pwm-简介"><a href="#_2-1-pwm-简介" class="header-anchor">#</a> 2.1 PWM 简介</h3> <p>大小和方向随时间发生周期性变化的电流称为交流电，交流中最基本的波形称为正弦波，除此之外的波形称为非正弦波。计算机、电视机、雷达灯装置中使用的信号称为脉冲波，锯齿波等，其电压和电流波形都是非正弦交流的一种。</p> <p>PWM（Pulse Width Modulation）就是脉冲宽度调制的意思，一种脉冲编码技术，即可以按照信号电平改变脉冲宽度。而脉冲宽度调制波的周期也是固定的，用占空比（高电平/周期，有效电平在整个信号周期中的时间比率，范围0~100%）来表示编码数值。PWM可以用于模拟信号电平进行数字编码，也可以通过高电平（或低电平）在整个周期中的时间来控制输出的能量，从而控制电机转速或LED亮度、蜂鸣器响度等。</p> <p>简单理解，PWM 是按一定的规则对各脉冲的宽度进行调制，既可以改变逆变电路输出电压的大小，也可以改变输出频率。在下本的例程中体现在控制无源蜂鸣器的响度和频率。</p> <h3 id="_2-2-pwm-接口"><a href="#_2-2-pwm-接口" class="header-anchor">#</a> 2.2 PWM 接口</h3> <p>AWorks 提供了用于控制 PWM 的接口函数：</p> <ul><li>aw_pwm_config：配置PWM（周期时间、脉宽时间等）；</li> <li>aw_pwm_enable：使能PWM输出；</li> <li>aw_pwm_disable：禁能PWM输出。</li></ul> <h2 id="_3-适配过程"><a href="#_3-适配过程" class="header-anchor">#</a> 3 适配过程</h2> <h3 id="_3-1-aworks演示代码"><a href="#_3-1-aworks演示代码" class="header-anchor">#</a> 3.1 AWorks演示代码</h3> <p>先来看看这些PWM相关接口的基本用法，我们在底板上跑一下简单的例程。</p> <p>步骤一：外设使能，在AWorks工程配置文件 <code>aw_prj_params.h</code> 中开启以下宏定义使能蜂鸣器设备以及相关的计时器：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AW_DEV_PWM_BUZZER</span>          <span class="token comment">/**&lt; \brief PWM Buzzer(蜂鸣器，需要配套 PWM) */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AW_DEV_IMX1050_QTIMER3_PWM</span> <span class="token comment">/**&lt; \brief iMX1050 QTimer3 PWM (与 PWM Buzzer 配套的 PWM，需要开启) */</span></span>
+</code></pre></div><p>步骤二：到外设文件中查看设备对应的引脚，比如这里查看 <code>awbl_hwconf_imx1050_qtimer3_pwm.h</code> 文件，可以看到该设备使用的引脚为 <code>GPIO1_18</code> ，我们需确定这个引脚能正常使用。</p> <p>步骤三：编写例程，设置蜂鸣器的周期与脉宽占比。示例代码如下：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_pwm.h&quot;</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AW_PWM_ID</span>   <span class="token expression">DE_BUZZER_PWMID </span><span class="token comment">/* 蜂鸣器PWM ID */</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span>    period1 <span class="token operator">=</span> <span class="token number">2000000</span><span class="token punctuation">;</span>      <span class="token comment">/* (ns) */</span>
+    <span class="token class-name">uint32_t</span>    period2 <span class="token operator">=</span> <span class="token number">1000000</span><span class="token punctuation">;</span>      <span class="token comment">/* (ns) */</span>
+
+    <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;\nPWM demo testing...\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment">/* 配置 PWM 的有效时间（高电平时间）50% ,周期 period1*/</span>
+        <span class="token function">aw_pwm_config</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">,</span> period1 <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> period1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_enable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">/* 使能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_disable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">/* 禁能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* 配置 PWM 的有效时间（高电平时间）2% ,周期 period1*/</span>
+        <span class="token function">aw_pwm_config</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">,</span> period1 <span class="token operator">/</span> <span class="token number">50</span><span class="token punctuation">,</span> period1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_enable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">/* 使能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_disable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">/* 禁能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* 配置 PWM 的有效时间（高电平时间）50% ,周期 period2*/</span>
+        <span class="token function">aw_pwm_config</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">,</span> period2 <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> period2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_enable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">/* 使能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_disable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">/* 禁能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* 配置 PWM 的有效时间（高电平时间）2% ,周期 period2*/</span>
+        <span class="token function">aw_pwm_config</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">,</span> period2 <span class="token operator">/</span> <span class="token number">50</span><span class="token punctuation">,</span> period2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_enable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">/* 使能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">aw_pwm_disable</span><span class="token punctuation">(</span>AW_PWM_ID<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">/* 禁能通道 */</span>
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这里的测试效果可以用示波器抓取波形来观察。</p> <h3 id="_3-2-c语言适配层"><a href="#_3-2-c语言适配层" class="header-anchor">#</a> 3.2 C语言适配层</h3> <p>在 IOT.js 中，适配某个平台的外设通常需要实现 <code>src/modules/iotjs_module_xxx.h</code> 文件中的接口，比如这里我们需要实现 <code>iotjs_module_pwm.h</code> 中的相关接口：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">IOTJS_MODULE_PWM_H</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">IOTJS_MODULE_PWM_H</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_def.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_module_periph_common.h&quot;</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token function">defined</span><span class="token punctuation">(</span>__TIZENRT__<span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iotbus_pwm.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token comment">// Forward declaration of platform data. These are only used by platform code.</span>
+<span class="token comment">// Generic PWM module never dereferences platform data pointer.</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">iotjs_pwm_platform_data_s</span> <span class="token class-name">iotjs_pwm_platform_data_t</span><span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  <span class="token class-name">jerry_value_t</span> jobject<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_pwm_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">;</span>
+
+  <span class="token class-name">uint32_t</span> pin<span class="token punctuation">;</span>
+  <span class="token keyword">double</span> duty_cycle<span class="token punctuation">;</span>
+  <span class="token keyword">double</span> period<span class="token punctuation">;</span>
+  bool enable<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token class-name">iotjs_pwm_t</span><span class="token punctuation">;</span>
+
+<span class="token class-name">jerry_value_t</span> <span class="token function">iotjs_pwm_set_platform_config</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">,</span>
+                                            <span class="token keyword">const</span> <span class="token class-name">jerry_value_t</span> jconfig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_pwm_open</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_pwm_set_period</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_pwm_set_dutycycle</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_pwm_set_enable</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_pwm_close</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Platform-related functions; they are implemented</span>
+<span class="token comment">// by platform code (i.e.: linux, nuttx, tizen).</span>
+<span class="token keyword">void</span> <span class="token function">iotjs_pwm_create_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">iotjs_pwm_destroy_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* IOTJS_MODULE_PWM_H */</span></span>
+</code></pre></div><p>适配层（<code>src/modules/aworks/iotjs_module_pwm-aworks.c</code>）代码如下：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token operator">!</span><span class="token function">defined</span><span class="token punctuation">(</span>WITH_AWORKS<span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">error</span> <span class="token string">&quot;Module __FILE__ is for AWorks only&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_def.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_gpio.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_pwm.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;modules/iotjs_module_pwm.h&quot;</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">iotjs_pwm_platform_data_s</span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> pid<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* PWM通道的id号 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AWORKS_PWM_STRING_PID</span> <span class="token string">&quot;pid&quot;</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AWORKS_GPIO_REQ_NAME</span> <span class="token string">&quot;iotjs_pwm&quot;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">iotjs_pwm_create_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  pwm<span class="token operator">-&gt;</span>platform_data <span class="token operator">=</span> <span class="token function">IOTJS_ALLOC</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_platform_data_t</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  pwm<span class="token operator">-&gt;</span>platform_data<span class="token operator">-&gt;</span>pid <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">iotjs_pwm_destroy_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">IOTJS_RELEASE</span><span class="token punctuation">(</span>platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token class-name">jerry_value_t</span> <span class="token function">iotjs_pwm_set_platform_config</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">,</span>
+                                            <span class="token keyword">const</span> <span class="token class-name">jerry_value_t</span> jconfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">JS_GET_REQUIRED_CONF_VALUE</span><span class="token punctuation">(</span>jconfig<span class="token punctuation">,</span> pwm<span class="token operator">-&gt;</span>platform_data<span class="token operator">-&gt;</span>pid<span class="token punctuation">,</span>
+                             AWORKS_PWM_STRING_PID<span class="token punctuation">,</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token function">jerry_create_undefined</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> bool <span class="token function">iotjs_pwm_set_period_and_dutycycle</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">aw_err_t</span> ret<span class="token punctuation">;</span>
+  <span class="token keyword">unsigned</span> <span class="token keyword">long</span> duty_ns<span class="token punctuation">;</span>
+  <span class="token keyword">unsigned</span> <span class="token keyword">long</span> period_ns<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_pwm_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> pwm<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+
+  period_ns <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span> <span class="token operator">*</span> pwm<span class="token operator">-&gt;</span>period<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  duty_ns <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span><span class="token punctuation">)</span>period_ns <span class="token operator">-</span> <span class="token punctuation">(</span>period_ns <span class="token operator">*</span> pwm<span class="token operator">-&gt;</span>duty_cycle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  ret <span class="token operator">=</span> <span class="token function">aw_pwm_config</span><span class="token punctuation">(</span>platform_data<span class="token operator">-&gt;</span>pid<span class="token punctuation">,</span> duty_ns<span class="token punctuation">,</span> period_ns<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> ret <span class="token operator">==</span> AW_OK <span class="token operator">?</span> true <span class="token operator">:</span> false<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_pwm_open</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">aw_err_t</span> ret<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> p_pins<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> pwm<span class="token operator">-&gt;</span>pin <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  ret <span class="token operator">=</span> <span class="token function">aw_gpio_pin_request</span><span class="token punctuation">(</span>AWORKS_GPIO_REQ_NAME<span class="token punctuation">,</span> p_pins<span class="token punctuation">,</span> <span class="token function">AW_NELEMENTS</span><span class="token punctuation">(</span>p_pins<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">==</span> AW_ERROR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">iotjs_pwm_set_period_and_dutycycle</span><span class="token punctuation">(</span>pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">==</span> <span class="token operator">-</span>AW_ENXIO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: pwm pin number error(%d)&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">==</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">aw_gpio_pin_release</span><span class="token punctuation">(</span>p_pins<span class="token punctuation">,</span> <span class="token function">AW_NELEMENTS</span><span class="token punctuation">(</span>p_pins<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: pwm pin is free, please check(%d)&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: pwm pin request unknow return(%d)&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_pwm_set_period</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">iotjs_pwm_set_period_and_dutycycle</span><span class="token punctuation">(</span>pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_pwm_set_dutycycle</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">iotjs_pwm_set_period_and_dutycycle</span><span class="token punctuation">(</span>pwm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_pwm_set_enable</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">aw_err_t</span> ret<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_pwm_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> pwm<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>pwm<span class="token operator">-&gt;</span>enable<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ret <span class="token operator">=</span> <span class="token function">aw_pwm_enable</span><span class="token punctuation">(</span>platform_data<span class="token operator">-&gt;</span>pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    ret <span class="token operator">=</span> <span class="token function">aw_pwm_disable</span><span class="token punctuation">(</span>platform_data<span class="token operator">-&gt;</span>pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> ret <span class="token operator">==</span> AW_OK <span class="token operator">?</span> true <span class="token operator">:</span> false<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_pwm_close</span><span class="token punctuation">(</span><span class="token class-name">iotjs_pwm_t</span><span class="token operator">*</span> pwm<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  pwm<span class="token operator">-&gt;</span>platform_data<span class="token operator">-&gt;</span>pid <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_3-2-js测试代码"><a href="#_3-2-js测试代码" class="header-anchor">#</a> 3.2 JS测试代码</h3> <p>适配好后，我们编写 JS 代码测试一下，这里同样借助蜂鸣器进行测试，可以用示波器抓取波形查看效果：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> pwm <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'pwm'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* 导入pwm模块 */</span>
+
+<span class="token keyword">var</span> dutyCycles <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0.25</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">/* 高低平占比 */</span>
+<span class="token keyword">var</span> frequencies <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">;</span>       <span class="token comment">/* 频率，单位:kHz */</span>
+
+<span class="token keyword">var</span> configuration <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">period</span><span class="token operator">:</span> <span class="token number">0.001</span><span class="token punctuation">,</span>  <span class="token comment">// 周期，单位：秒，表示1kHz</span>
+  <span class="token literal-property property">dutyCycle</span><span class="token operator">:</span> dutyCycles<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">pin</span><span class="token operator">:</span> <span class="token number">18</span>  <span class="token comment">// 引脚</span>
+  <span class="token literal-property property">pid</span><span class="token operator">:</span> <span class="token number">0</span>   <span class="token comment">// PWM ID</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">initPwm</span><span class="token punctuation">(</span><span class="token parameter">pwm</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  pwm<span class="token punctuation">.</span><span class="token function">setPeriodSync</span><span class="token punctuation">(</span><span class="token number">0.001</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  pwm<span class="token punctuation">.</span><span class="token function">setDutyCycleSync</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> pwm0 <span class="token operator">=</span> pwm<span class="token punctuation">.</span><span class="token function">openSync</span><span class="token punctuation">(</span>configuration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'PWM initialized'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+pwm0<span class="token punctuation">.</span><span class="token function">setEnableSync</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">dutyCycleTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">dutyCycleTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> loopCnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> loop <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pwm0 <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>loopCnt <span class="token operator">&gt;=</span> dutyCycles<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">clearInterval</span><span class="token punctuation">(</span>loop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">initPwm</span><span class="token punctuation">(</span>pwm0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'PWM duty-cycle test complete'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">frequencyTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;dutycycle(%d)&quot;</span><span class="token punctuation">,</span> dutyCycles<span class="token punctuation">[</span>loopCnt<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pwm0<span class="token punctuation">.</span><span class="token function">setDutyCycleSync</span><span class="token punctuation">(</span>dutyCycles<span class="token punctuation">[</span>loopCnt<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">frequencyTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> loopCnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> loop <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>loopCnt <span class="token operator">&gt;=</span> frequencies<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">clearInterval</span><span class="token punctuation">(</span>loop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      pwm0<span class="token punctuation">.</span><span class="token function">setEnableSync</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      pwm0<span class="token punctuation">.</span><span class="token function">closeSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'PWM frequency test complete'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;frequency(%d)&quot;</span><span class="token punctuation">,</span> frequencies<span class="token punctuation">[</span>loopCnt<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pwm0<span class="token punctuation">.</span><span class="token function">setFrequencySync</span><span class="token punctuation">(</span>frequencies<span class="token punctuation">[</span>loopCnt<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>PWM initialized
+dutycycle<span class="token punctuation">(</span><span class="token number">0.25</span><span class="token punctuation">)</span>
+dutycycle<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+dutycycle<span class="token punctuation">(</span><span class="token number">0.75</span><span class="token punctuation">)</span>
+PWM duty-cycle <span class="token builtin class-name">test</span> complete
+frequency<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+frequency<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+frequency<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span>
+PWM frequency <span class="token builtin class-name">test</span> complete
+</code></pre></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_1-前言" class="sidebar-link reco-side-_1-前言" data-v-b57cc07c>1 前言</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_2-pwm" class="sidebar-link reco-side-_2-pwm" data-v-b57cc07c>2 PWM</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_2-1-pwm-简介" class="sidebar-link reco-side-_2-1-pwm-简介" data-v-b57cc07c>2.1 PWM 简介</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_2-2-pwm-接口" class="sidebar-link reco-side-_2-2-pwm-接口" data-v-b57cc07c>2.2 PWM 接口</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_3-适配过程" class="sidebar-link reco-side-_3-适配过程" data-v-b57cc07c>3 适配过程</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_3-1-aworks演示代码" class="sidebar-link reco-side-_3-1-aworks演示代码" data-v-b57cc07c>3.1 AWorks演示代码</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_3-2-c语言适配层" class="sidebar-link reco-side-_3-2-c语言适配层" data-v-b57cc07c>3.2 C语言适配层</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_pwm.html#_3-2-js测试代码" class="sidebar-link reco-side-_3-2-js测试代码" data-v-b57cc07c>3.2 JS测试代码</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.389323ad.js" defer></script><script src="/assets/js/3.8cd7b294.js" defer></script><script src="/assets/js/1.2acc022b.js" defer></script><script src="/assets/js/75.36ed645a.js" defer></script>
+  </body>
+</html>

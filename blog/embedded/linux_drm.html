@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux DRM基本概念与使用示例 | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js"></script>
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7eaaf838.css" as="style"><link rel="preload" href="/assets/js/app.389323ad.js" as="script"><link rel="preload" href="/assets/js/3.8cd7b294.js" as="script"><link rel="preload" href="/assets/js/1.2acc022b.js" as="script"><link rel="preload" href="/assets/js/57.ba66cfdf.js" as="script"><link rel="prefetch" href="/assets/js/10.509ef012.js"><link rel="prefetch" href="/assets/js/100.87b48422.js"><link rel="prefetch" href="/assets/js/101.26b12fac.js"><link rel="prefetch" href="/assets/js/102.7bb41561.js"><link rel="prefetch" href="/assets/js/103.9625cf57.js"><link rel="prefetch" href="/assets/js/104.656f8f66.js"><link rel="prefetch" href="/assets/js/105.01e163d8.js"><link rel="prefetch" href="/assets/js/11.c2055ebb.js"><link rel="prefetch" href="/assets/js/12.5b98e285.js"><link rel="prefetch" href="/assets/js/13.da357cb6.js"><link rel="prefetch" href="/assets/js/14.14359ca8.js"><link rel="prefetch" href="/assets/js/15.3f13fc82.js"><link rel="prefetch" href="/assets/js/16.7f349b92.js"><link rel="prefetch" href="/assets/js/17.dfbfd566.js"><link rel="prefetch" href="/assets/js/18.c5da041e.js"><link rel="prefetch" href="/assets/js/19.0f9638df.js"><link rel="prefetch" href="/assets/js/20.ebb7267b.js"><link rel="prefetch" href="/assets/js/21.01453e44.js"><link rel="prefetch" href="/assets/js/22.dd08b5d9.js"><link rel="prefetch" href="/assets/js/23.59d3ba1f.js"><link rel="prefetch" href="/assets/js/24.b4851731.js"><link rel="prefetch" href="/assets/js/25.8fe447e5.js"><link rel="prefetch" href="/assets/js/26.ba72535f.js"><link rel="prefetch" href="/assets/js/27.d78e5a7f.js"><link rel="prefetch" href="/assets/js/28.869cfdab.js"><link rel="prefetch" href="/assets/js/29.94d6c0da.js"><link rel="prefetch" href="/assets/js/30.4d578f75.js"><link rel="prefetch" href="/assets/js/31.b176b736.js"><link rel="prefetch" href="/assets/js/32.b0e5c692.js"><link rel="prefetch" href="/assets/js/33.50670ab7.js"><link rel="prefetch" href="/assets/js/34.ca843b26.js"><link rel="prefetch" href="/assets/js/35.9d0a871d.js"><link rel="prefetch" href="/assets/js/36.058658f5.js"><link rel="prefetch" href="/assets/js/37.79702756.js"><link rel="prefetch" href="/assets/js/38.3becf2a9.js"><link rel="prefetch" href="/assets/js/39.ce9c4993.js"><link rel="prefetch" href="/assets/js/4.7234e624.js"><link rel="prefetch" href="/assets/js/40.63f404db.js"><link rel="prefetch" href="/assets/js/41.055093b0.js"><link rel="prefetch" href="/assets/js/42.fdac0499.js"><link rel="prefetch" href="/assets/js/43.eccc4bc3.js"><link rel="prefetch" href="/assets/js/44.15c550df.js"><link rel="prefetch" href="/assets/js/45.e1f3a91a.js"><link rel="prefetch" href="/assets/js/46.2f663949.js"><link rel="prefetch" href="/assets/js/47.e414f8b4.js"><link rel="prefetch" href="/assets/js/48.33742d27.js"><link rel="prefetch" href="/assets/js/49.39d768fb.js"><link rel="prefetch" href="/assets/js/5.c5df887a.js"><link rel="prefetch" href="/assets/js/50.6f7b21d1.js"><link rel="prefetch" href="/assets/js/51.dd0d4797.js"><link rel="prefetch" href="/assets/js/52.d6b486de.js"><link rel="prefetch" href="/assets/js/53.a375da01.js"><link rel="prefetch" href="/assets/js/54.286f4db9.js"><link rel="prefetch" href="/assets/js/55.4eca20c6.js"><link rel="prefetch" href="/assets/js/56.3e29c0fe.js"><link rel="prefetch" href="/assets/js/58.9ab4c356.js"><link rel="prefetch" href="/assets/js/59.f4a92ca7.js"><link rel="prefetch" href="/assets/js/6.c5c0e212.js"><link rel="prefetch" href="/assets/js/60.25abd7f9.js"><link rel="prefetch" href="/assets/js/61.7152649d.js"><link rel="prefetch" href="/assets/js/62.9c19bfc5.js"><link rel="prefetch" href="/assets/js/63.b414f496.js"><link rel="prefetch" href="/assets/js/64.58bc0c9c.js"><link rel="prefetch" href="/assets/js/65.b593055b.js"><link rel="prefetch" href="/assets/js/66.4eb75485.js"><link rel="prefetch" href="/assets/js/67.a110db76.js"><link rel="prefetch" href="/assets/js/68.f4bbae0a.js"><link rel="prefetch" href="/assets/js/69.532ecaf5.js"><link rel="prefetch" href="/assets/js/7.54ced24c.js"><link rel="prefetch" href="/assets/js/70.4a3e45cb.js"><link rel="prefetch" href="/assets/js/71.37d0cbc5.js"><link rel="prefetch" href="/assets/js/72.c19ed0ab.js"><link rel="prefetch" href="/assets/js/73.1e1c5639.js"><link rel="prefetch" href="/assets/js/74.a495e734.js"><link rel="prefetch" href="/assets/js/75.36ed645a.js"><link rel="prefetch" href="/assets/js/76.4eb141f1.js"><link rel="prefetch" href="/assets/js/77.dea7ff9d.js"><link rel="prefetch" href="/assets/js/78.d77bc99b.js"><link rel="prefetch" href="/assets/js/79.e4856393.js"><link rel="prefetch" href="/assets/js/8.e62f1843.js"><link rel="prefetch" href="/assets/js/80.fd65c7a5.js"><link rel="prefetch" href="/assets/js/81.7754f641.js"><link rel="prefetch" href="/assets/js/82.9ab18ada.js"><link rel="prefetch" href="/assets/js/83.06c080f6.js"><link rel="prefetch" href="/assets/js/84.3b801bcb.js"><link rel="prefetch" href="/assets/js/85.f90e359b.js"><link rel="prefetch" href="/assets/js/86.5ae50729.js"><link rel="prefetch" href="/assets/js/87.1fe37ed2.js"><link rel="prefetch" href="/assets/js/88.47071570.js"><link rel="prefetch" href="/assets/js/89.0baa310a.js"><link rel="prefetch" href="/assets/js/9.fd63a988.js"><link rel="prefetch" href="/assets/js/90.714224f5.js"><link rel="prefetch" href="/assets/js/91.fbc0997e.js"><link rel="prefetch" href="/assets/js/92.c1c0a549.js"><link rel="prefetch" href="/assets/js/93.9870265b.js"><link rel="prefetch" href="/assets/js/94.ff12a7de.js"><link rel="prefetch" href="/assets/js/95.976ae2f6.js"><link rel="prefetch" href="/assets/js/96.41f2642f.js"><link rel="prefetch" href="/assets/js/97.65fe8305.js"><link rel="prefetch" href="/assets/js/98.3a87e365.js"><link rel="prefetch" href="/assets/js/99.cc9e61ce.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7eaaf838.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>89</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>24</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#67cc86;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>Linux DRM基本概念与使用示例</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">Linux DRM基本概念与使用示例</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2020/12/12</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/blog/embedded/linux_drm.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>C</span><span class="tag-item" data-v-8a445198>嵌入式</span><span class="tag-item" data-v-8a445198>Linux</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1 前言</h2> <p>在本周的工作中为解决客户问题，查看awtk-linux-fb中的源码，其中对于里面关于DRM的内容很感兴趣，请教同事后又上网查了资料，本文对DRM的学习做了总结记录，并以C语言练习了DRM的使用。在此感谢回答我疑问的同事。</p> <blockquote><p>备注：<a href="https://github.com/zlgopen/awtk-linux-fb" target="_blank" rel="noopener noreferrer">awtk-linux-fb<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 是 AWTK 针对arm-linux平台的移植。</p></blockquote> <h2 id="_2-什么是drm"><a href="#_2-什么是drm" class="header-anchor">#</a> 2 什么是DRM</h2> <p>DRM（Direct Rendering Manager）即<strong>直接渲染管理器</strong>。它是为了解决多个程序对 Video Card 资源的协同使用问题而产生的。它向用户空间提供了一组 API，用以访问操纵 GPU。</p> <p>简单理解，DRM是Linux下的图形渲染架构，用来管理显示输出和分配buffer。应用程序可以直接操纵 DRM的 ioctl 或者是用 framebuffer 提供的接口进行显示相关操作。后来封装成了 libdrm 库，让用户可以更加方便的进行显示控制。</p> <h2 id="_3-drm中的基本概念"><a href="#_3-drm中的基本概念" class="header-anchor">#</a> 3 DRM中的基本概念</h2> <p>要弄明白 DRM 是怎么把用户的绘图输出到显示屏上，绕不开以下几个概念，具体关系如下图所示：</p> <ul><li>Framebuffer</li> <li>CRTC</li> <li>Encoder</li> <li>Connector</li> <li>Display Device(LCD)</li></ul> <p><img src="/assets/img/concepts_in_drm.eeb3cbfd.jpg" alt="DRM中的基本概念"></p> <h3 id="_3-1-drm-framebuffer"><a href="#_3-1-drm-framebuffer" class="header-anchor">#</a> 3.1 DRM Framebuffer</h3> <p>它是一块内存区域，可以理解为一块画布，驱动和应用层都能访问它。绘制前需要将它格式化，设定绘制的色彩模式（例如RGB24，YUV 等）和画布的大小（分辨率）。</p> <h3 id="_3-2-crtc"><a href="#_3-2-crtc" class="header-anchor">#</a> 3.2 CRTC</h3> <p>阴极摄像管上下文。这个看名字很很难懂，但简单的来说他就是显示输出的上下文，可以理解为扫描仪。CRTC对内连接 Framebuffer 地址，对外连接 Encoder，会扫描 Framebuffer 上的内容，叠加上 Planes 的内容，最后传给Encoder。</p> <h3 id="_3-3-planes"><a href="#_3-3-planes" class="header-anchor">#</a> 3.3 Planes</h3> <p>平面。它和 Framebuffer 一样是内存地址。它的作用是干什么呢？打个比方，在电脑上，一边打字聊微信一边看电影，这里对立出来两个概念，打字是文字交互，是小范围更新的 Graphics 模式；看电影是全幅高速更新的 Video 模式，这两种模式将显卡的使用拉上了两个极端。</p> <p>这时Planes就发挥了很好的作用，它给 Video 刷新提供了高速通道，使 Video 单独为一个图层，可以叠加在 Graphic 上或之下，并具有缩放等功能。</p> <p>Planes 是可以有多个的，相当于图层叠加，因此扫描仪（CRTC）扫描的图像实际上往往是 Framebuffer 和 Planes 的组合（Blending）。</p> <h3 id="_3-4-encoder"><a href="#_3-4-encoder" class="header-anchor">#</a> 3.4 Encoder</h3> <p>编码器。它的作用就是将内存的 pixel 像素编码（转换）为显示器所需要的信号。简单理解就是，如果需要将画面显示到不同的设备（Display Device）上，需要将画面转化为不同的电信号，例如 DVID、VGA、YPbPr、CVBS、Mipi、eDP 等。</p> <p>Encoder 和 CRTC 之间的交互就是我们所说的 ModeSetting，其中包含了前面提到的色彩模式、还有时序（Timing）等。</p> <h3 id="_3-5-connector"><a href="#_3-5-connector" class="header-anchor">#</a> 3.5 Connector</h3> <p>连接器。它常常对应于物理连接器 (例如 VGA, DVI, FPD-Link, HDMI, DisplayPort, S-Video等) ，它不是指物理线，在 DRM中，Connector 是一个抽象的数据结构，代表连接的显示设备，从Connector中可以得到当前物理连接的输出设备相关的信息 ，例如，连接状态，EDID数据，DPMS状态、支持的视频模式等。</p> <h2 id="_4-drm使用示例"><a href="#_4-drm使用示例" class="header-anchor">#</a> 4 DRM使用示例</h2> <p>根据上文，可以知道 DRM 是一个显示驱动框架，也就是把功能封装成 open/close/ioctl 等标准接口，应用程序调用这些接口来驱动设备，显示数据。本文接下来将从使用者的角度来看，验证和使用DRM驱动。</p> <p><strong>DRM设备节点</strong> ：DRM 驱动会在 <code>/dev/dri</code> 下创建3个设备节点：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>card0
+controlD64
+renderD128
+</code></pre></div><p><strong>libdrm库</strong> ：DRM驱动，对用户空间，提供了专门的的调用库 <code>libdrm.so</code>，用户空间通过该库可以间接的调用和使用驱动。</p> <h3 id="_4-1-打开设备"><a href="#_4-1-打开设备" class="header-anchor">#</a> 4.1 打开设备</h3> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* 打开设备有专门的接口：drmOpen ，但此处为方便，使用open函数 */</span>
+<span class="token keyword">int</span> fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token string">&quot;/dev/dri/card0&quot;</span><span class="token punctuation">,</span> O_RDWR <span class="token operator">|</span> O_CLOEXEC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>fd <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ret <span class="token operator">=</span> <span class="token operator">-</span>errno<span class="token punctuation">;</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;cannot open '%s': %m\n&quot;</span><span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><h3 id="_4-2-检查drm的能力"><a href="#_4-2-检查drm的能力" class="header-anchor">#</a> 4.2 检查DRM的能力</h3> <p>DRM的能力通过drmGetCap接口获取，用drm_get_cap结构描述：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/** DRM_IOCTL_GET_CAP ioctl argument type */</span>
+<span class="token keyword">struct</span> <span class="token class-name">drm_get_cap</span> <span class="token punctuation">{</span>
+    __u64 capability<span class="token punctuation">;</span>
+    __u64 value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">drmGetCap</span><span class="token punctuation">(</span><span class="token keyword">int</span> fd<span class="token punctuation">,</span> <span class="token class-name">uint64_t</span> capability<span class="token punctuation">,</span> <span class="token class-name">uint64_t</span> <span class="token operator">*</span>value<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">drm_get_cap</span> cap<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ret<span class="token punctuation">;</span>
+
+    <span class="token function">memclear</span><span class="token punctuation">(</span>cap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cap<span class="token punctuation">.</span>capability <span class="token operator">=</span> capability<span class="token punctuation">;</span>
+
+    ret <span class="token operator">=</span> <span class="token function">drmIoctl</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> DRM_IOCTL_GET_CAP<span class="token punctuation">,</span> <span class="token operator">&amp;</span>cap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+
+    <span class="token operator">*</span>value <span class="token operator">=</span> cap<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>使用示例：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token class-name">uint64_t</span> has_dumb<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">drmGetCap</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> DRM_CAP_DUMB_BUFFER<span class="token punctuation">,</span> <span class="token operator">&amp;</span>has_dumb<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token operator">!</span>has_dumb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;drm device '%s' does not support dumb buffers\n&quot;</span><span class="token punctuation">,</span>
+        node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span>EOPNOTSUPP<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_4-3-检索resource"><a href="#_4-3-检索resource" class="header-anchor">#</a> 4.3 检索Resource</h3> <p>获取Resource具体看以下函数：</p> <div class="language-c extra-class"><pre class="language-c"><code>drmModeResPtr <span class="token function">drmModeGetResources</span><span class="token punctuation">(</span><span class="token keyword">int</span> fd<span class="token punctuation">)</span>
+</code></pre></div><p>Resource结构封装：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">drm_mode_card_res</span> <span class="token punctuation">{</span>
+    __u64 fb_id_ptr<span class="token punctuation">;</span>
+    __u64 crtc_id_ptr<span class="token punctuation">;</span>
+    __u64 connector_id_ptr<span class="token punctuation">;</span>
+    __u64 encoder_id_ptr<span class="token punctuation">;</span>
+    __u32 count_fbs<span class="token punctuation">;</span>
+    __u32 count_crtcs<span class="token punctuation">;</span>
+    __u32 count_connectors<span class="token punctuation">;</span>
+    __u32 count_encoders<span class="token punctuation">;</span>
+    __u32 min_width<span class="token punctuation">,</span> max_width<span class="token punctuation">;</span>
+    __u32 min_height<span class="token punctuation">,</span> max_height<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">_drmModeRes</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> count_fbs<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> <span class="token operator">*</span>fbs<span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count_crtcs<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> <span class="token operator">*</span>crtcs<span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count_connectors<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> <span class="token operator">*</span>connectors<span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count_encoders<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> <span class="token operator">*</span>encoders<span class="token punctuation">;</span>
+
+    <span class="token class-name">uint32_t</span> min_width<span class="token punctuation">,</span> max_width<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> min_height<span class="token punctuation">,</span> max_height<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> drmModeRes<span class="token punctuation">,</span> <span class="token operator">*</span>drmModeResPtr<span class="token punctuation">;</span>
+</code></pre></div><p>使用示例：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* retrieve resources */</span>
+<span class="token keyword">int</span> ret <span class="token operator">=</span> <span class="token function">drmModeGetResources</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;cannot retrieve DRM resources (%d): %m\n&quot;</span><span class="token punctuation">,</span>
+        errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span>errno<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_4-4-获取connector"><a href="#_4-4-获取connector" class="header-anchor">#</a> 4.4 获取Connector</h3> <p>_drmModeConnector描述结构：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">_drmModeConnector</span> <span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span> connector_id<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> encoder_id<span class="token punctuation">;</span> <span class="token comment">/**&lt; Encoder currently connected to */</span>
+    <span class="token class-name">uint32_t</span> connector_type<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> connector_type_id<span class="token punctuation">;</span>
+    drmModeConnection connection<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> mmWidth<span class="token punctuation">,</span> mmHeight<span class="token punctuation">;</span> <span class="token comment">/**&lt; HxW in millimeters */</span>
+    drmModeSubPixel subpixel<span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count_modes<span class="token punctuation">;</span>
+    drmModeModeInfoPtr modes<span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count_props<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> <span class="token operator">*</span>props<span class="token punctuation">;</span> <span class="token comment">/**&lt; List of property ids */</span>
+    <span class="token class-name">uint64_t</span> <span class="token operator">*</span>prop_values<span class="token punctuation">;</span> <span class="token comment">/**&lt; List of property values */</span>
+
+    <span class="token keyword">int</span> count_encoders<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> <span class="token operator">*</span>encoders<span class="token punctuation">;</span> <span class="token comment">/**&lt; List of encoder ids */</span>
+<span class="token punctuation">}</span> drmModeConnector<span class="token punctuation">,</span> <span class="token operator">*</span>drmModeConnectorPtr<span class="token punctuation">;</span>
+</code></pre></div><p>使用示例：</p> <div class="language-c extra-class"><pre class="language-c"><code>drmModeConnector <span class="token operator">*</span>conn <span class="token operator">=</span> <span class="token function">drmModeGetConnector</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> res<span class="token operator">-&gt;</span>connectors<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>conn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;cannot retrieve DRM connector %u:%u (%d): %m\n&quot;</span><span class="token punctuation">,</span>
+        i<span class="token punctuation">,</span> res<span class="token operator">-&gt;</span>connectors<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_4-5-encoder"><a href="#_4-5-encoder" class="header-anchor">#</a> 4.5 Encoder</h3> <p>Encoder的结构描述：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">_drmModeEncoder</span> <span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span> encoder_id<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> encoder_type<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> crtc_id<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> possible_crtcs<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> possible_clones<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> drmModeEncoder<span class="token punctuation">,</span> <span class="token operator">*</span>drmModeEncoderPtr<span class="token punctuation">;</span>
+</code></pre></div><p>使用示例：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">if</span> <span class="token punctuation">(</span>conn<span class="token operator">-&gt;</span>encoder_id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    drmModeEncoder <span class="token operator">*</span>enc <span class="token operator">=</span> <span class="token function">drmModeGetEncoder</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> conn<span class="token operator">-&gt;</span>encoder_id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-c extra-class"><pre class="language-c"><code>drmModeEncoderPtr <span class="token function">drmModeGetEncoder</span><span class="token punctuation">(</span><span class="token keyword">int</span> fd<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> encoder_id<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">drm_mode_get_encoder</span> enc<span class="token punctuation">;</span>
+    drmModeEncoderPtr r <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+    <span class="token function">memclear</span><span class="token punctuation">(</span>enc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    enc<span class="token punctuation">.</span>encoder_id <span class="token operator">=</span> encoder_id<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">drmIoctl</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> DRM_IOCTL_MODE_GETENCODER<span class="token punctuation">,</span> <span class="token operator">&amp;</span>enc<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>r <span class="token operator">=</span> <span class="token function">drmMalloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token operator">*</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    r<span class="token operator">-&gt;</span>encoder_id <span class="token operator">=</span> enc<span class="token punctuation">.</span>encoder_id<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>crtc_id <span class="token operator">=</span> enc<span class="token punctuation">.</span>crtc_id<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>encoder_type <span class="token operator">=</span> enc<span class="token punctuation">.</span>encoder_type<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>possible_crtcs <span class="token operator">=</span> enc<span class="token punctuation">.</span>possible_crtcs<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>possible_clones <span class="token operator">=</span> enc<span class="token punctuation">.</span>possible_clones<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_4-6-crtc"><a href="#_4-6-crtc" class="header-anchor">#</a> 4.6 CRTC</h3> <p>CRTC结构描述：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">crtc</span> <span class="token punctuation">{</span>
+    drmModeCrtc <span class="token operator">*</span>crtc<span class="token punctuation">;</span>
+    drmModeObjectProperties <span class="token operator">*</span>props<span class="token punctuation">;</span>
+    drmModePropertyRes <span class="token operator">*</span><span class="token operator">*</span>props_info<span class="token punctuation">;</span>
+    drmModeModeInfo <span class="token operator">*</span>mode<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">_drmModeCrtc</span> <span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span> crtc_id<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span> buffer_id<span class="token punctuation">;</span> <span class="token comment">/**&lt; FB id to connect to 0 = disconnect */</span>
+
+    <span class="token class-name">uint32_t</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span> <span class="token comment">/**&lt; Position on the framebuffer */</span>
+    <span class="token class-name">uint32_t</span> width<span class="token punctuation">,</span> height<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> mode_valid<span class="token punctuation">;</span>
+    drmModeModeInfo mode<span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> gamma_size<span class="token punctuation">;</span> <span class="token comment">/**&lt; Number of gamma stops */</span>
+
+<span class="token punctuation">}</span> drmModeCrtc<span class="token punctuation">,</span> <span class="token operator">*</span>drmModeCrtcPtr<span class="token punctuation">;</span>
+</code></pre></div><h3 id="_4-7-framebuffer"><a href="#_4-7-framebuffer" class="header-anchor">#</a> 4.7 FrameBuffer</h3> <ol><li>创建DUMB Buffer：</li></ol> <div class="language-c extra-class"><pre class="language-c"><code>ret <span class="token operator">=</span> <span class="token function">drmIoctl</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> DRM_IOCTL_MODE_CREATE_DUMB<span class="token punctuation">,</span> <span class="token operator">&amp;</span>creq<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;cannot create dumb buffer (%d): %m\n&quot;</span><span class="token punctuation">,</span> errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span>errno<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>添加FrameBuffer：</li></ol> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* create framebuffer object for the dumb-buffer */</span>
+ret <span class="token operator">=</span> <span class="token function">drmModeAddFB</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> dev<span class="token operator">-&gt;</span>width<span class="token punctuation">,</span> dev<span class="token operator">-&gt;</span>height<span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> dev<span class="token operator">-&gt;</span>stride<span class="token punctuation">,</span> dev<span class="token operator">-&gt;</span>handle<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dev<span class="token operator">-&gt;</span>fb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>ret<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;cannot create framebuffer (%d): %m\n&quot;</span><span class="token punctuation">,</span> errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ret <span class="token operator">=</span> <span class="token operator">-</span>errno<span class="token punctuation">;</span>
+    <span class="token keyword">goto</span> err_destroy<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>准备map：</li></ol> <div class="language-c extra-class"><pre class="language-c"><code>    <span class="token comment">/* prepare buffer for memory mapping */</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mreq<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>mreq<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    mreq<span class="token punctuation">.</span>handle <span class="token operator">=</span> dev<span class="token operator">-&gt;</span>handle<span class="token punctuation">;</span>
+    ret <span class="token operator">=</span> <span class="token function">drmIoctl</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> DRM_IOCTL_MODE_MAP_DUMB<span class="token punctuation">,</span> <span class="token operator">&amp;</span>mreq<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;cannot map dumb buffer (%d): %m\n&quot;</span><span class="token punctuation">,</span>
+            errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ret <span class="token operator">=</span> <span class="token operator">-</span>errno<span class="token punctuation">;</span>
+        <span class="token keyword">goto</span> err_fb<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>做map操作：</li></ol> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* perform actual memory mapping */</span>
+dev<span class="token operator">-&gt;</span>map <span class="token operator">=</span> <span class="token function">mmap</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> dev<span class="token operator">-&gt;</span>size<span class="token punctuation">,</span> PROT_READ <span class="token operator">|</span> PROT_WRITE<span class="token punctuation">,</span> MAP_SHARED<span class="token punctuation">,</span> fd<span class="token punctuation">,</span> mreq<span class="token punctuation">.</span>offset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>dev<span class="token operator">-&gt;</span>map <span class="token operator">==</span> MAP_FAILED<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;cannot mmap dumb buffer (%d): %m\n&quot;</span><span class="token punctuation">,</span> errno<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ret <span class="token operator">=</span> <span class="token operator">-</span>errno<span class="token punctuation">;</span>
+    <span class="token keyword">goto</span> err_fb<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_4-8-crtc的准备"><a href="#_4-8-crtc的准备" class="header-anchor">#</a> 4.8 CRTC的准备</h3> <p>准备函数：drmModeGetCrtc、drmModeSetCrtc</p> <div class="language-c extra-class"><pre class="language-c"><code>drmModeCrtcPtr <span class="token function">drmModeGetCrtc</span><span class="token punctuation">(</span><span class="token keyword">int</span> fd<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> crtcId<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">drm_mode_crtc</span> crtc<span class="token punctuation">;</span>
+    drmModeCrtcPtr r<span class="token punctuation">;</span>
+
+    <span class="token function">memclear</span><span class="token punctuation">(</span>crtc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    crtc<span class="token punctuation">.</span>crtc_id <span class="token operator">=</span> crtcId<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">drmIoctl</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> DRM_IOCTL_MODE_GETCRTC<span class="token punctuation">,</span> <span class="token operator">&amp;</span>crtc<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/*
+     * return
+     */</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>r <span class="token operator">=</span> <span class="token function">drmMalloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token operator">*</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    r<span class="token operator">-&gt;</span>crtc_id         <span class="token operator">=</span> crtc<span class="token punctuation">.</span>crtc_id<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>x               <span class="token operator">=</span> crtc<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>y               <span class="token operator">=</span> crtc<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>mode_valid      <span class="token operator">=</span> crtc<span class="token punctuation">.</span>mode_valid<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token operator">-&gt;</span>mode_valid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">memcpy</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r<span class="token operator">-&gt;</span>mode<span class="token punctuation">,</span> <span class="token operator">&amp;</span>crtc<span class="token punctuation">.</span>mode<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">drm_mode_modeinfo</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token operator">-&gt;</span>width <span class="token operator">=</span> crtc<span class="token punctuation">.</span>mode<span class="token punctuation">.</span>hdisplay<span class="token punctuation">;</span>
+        r<span class="token operator">-&gt;</span>height <span class="token operator">=</span> crtc<span class="token punctuation">.</span>mode<span class="token punctuation">.</span>vdisplay<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    r<span class="token operator">-&gt;</span>buffer_id       <span class="token operator">=</span> crtc<span class="token punctuation">.</span>fb_id<span class="token punctuation">;</span>
+    r<span class="token operator">-&gt;</span>gamma_size      <span class="token operator">=</span> crtc<span class="token punctuation">.</span>gamma_size<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">drmModeSetCrtc</span><span class="token punctuation">(</span><span class="token keyword">int</span> fd<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> crtcId<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> bufferId<span class="token punctuation">,</span>
+           <span class="token class-name">uint32_t</span> x<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> y<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> <span class="token operator">*</span>connectors<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span>
+           drmModeModeInfoPtr mode<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">drm_mode_crtc</span> crtc<span class="token punctuation">;</span>
+
+    <span class="token function">memclear</span><span class="token punctuation">(</span>crtc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    crtc<span class="token punctuation">.</span>x             <span class="token operator">=</span> x<span class="token punctuation">;</span>
+    crtc<span class="token punctuation">.</span>y             <span class="token operator">=</span> y<span class="token punctuation">;</span>
+    crtc<span class="token punctuation">.</span>crtc_id       <span class="token operator">=</span> crtcId<span class="token punctuation">;</span>
+    crtc<span class="token punctuation">.</span>fb_id         <span class="token operator">=</span> bufferId<span class="token punctuation">;</span>
+    crtc<span class="token punctuation">.</span>set_connectors_ptr <span class="token operator">=</span> <span class="token function">VOID2U64</span><span class="token punctuation">(</span>connectors<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    crtc<span class="token punctuation">.</span>count_connectors <span class="token operator">=</span> count<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>mode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">memcpy</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>crtc<span class="token punctuation">.</span>mode<span class="token punctuation">,</span> mode<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">drm_mode_modeinfo</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      crtc<span class="token punctuation">.</span>mode_valid <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token function">DRM_IOCTL</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> DRM_IOCTL_MODE_SETCRTC<span class="token punctuation">,</span> <span class="token operator">&amp;</span>crtc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_4-9-绘制"><a href="#_4-9-绘制" class="header-anchor">#</a> 4.9 绘制</h3> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">modeset_draw</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">uint8_t</span> r<span class="token punctuation">,</span> g<span class="token punctuation">,</span> b<span class="token punctuation">;</span>
+    bool r_up<span class="token punctuation">,</span> g_up<span class="token punctuation">,</span> b_up<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">,</span> off<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> <span class="token class-name">modeset_dev</span> <span class="token operator">*</span>iter<span class="token punctuation">;</span>
+
+    <span class="token function">srand</span><span class="token punctuation">(</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    r <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">0xff</span><span class="token punctuation">;</span>
+    g <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">0xff</span><span class="token punctuation">;</span>
+    b <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">0xff</span><span class="token punctuation">;</span>
+    r_up <span class="token operator">=</span> g_up <span class="token operator">=</span> b_up <span class="token operator">=</span> true<span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        r <span class="token operator">=</span> <span class="token function">next_color</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>r_up<span class="token punctuation">,</span> r<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        g <span class="token operator">=</span> <span class="token function">next_color</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>g_up<span class="token punctuation">,</span> g<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        b <span class="token operator">=</span> <span class="token function">next_color</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b_up<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>iter <span class="token operator">=</span> modeset_list<span class="token punctuation">;</span> iter<span class="token punctuation">;</span> iter <span class="token operator">=</span> iter<span class="token operator">-&gt;</span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> iter<span class="token operator">-&gt;</span>height<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span>k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> iter<span class="token operator">-&gt;</span>width<span class="token punctuation">;</span> <span class="token operator">++</span>k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    off <span class="token operator">=</span> iter<span class="token operator">-&gt;</span>stride <span class="token operator">*</span> j <span class="token operator">+</span> k <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">;</span>
+                    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>iter<span class="token operator">-&gt;</span>map<span class="token punctuation">[</span>off<span class="token punctuation">]</span> <span class="token operator">=</span>
+                             <span class="token punctuation">(</span>r <span class="token operator">&lt;&lt;</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>g <span class="token operator">&lt;&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">|</span> b<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">usleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="_5-总结"><a href="#_5-总结" class="header-anchor">#</a> 5 总结</h2> <p>以上使用示例仅为简单绘制，更详细且严谨的代码请参考：<a href="https://github.com/zlgopen/awtk-linux-fb/blob/master/awtk-port/lcd_linux/lcd_linux_drm.c" target="_blank" rel="noopener noreferrer">awtk-linux-fb 中的 lcd_linux_drm.c<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_1-前言" class="sidebar-link reco-side-_1-前言" data-v-b57cc07c>1 前言</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_2-什么是drm" class="sidebar-link reco-side-_2-什么是drm" data-v-b57cc07c>2 什么是DRM</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_3-drm中的基本概念" class="sidebar-link reco-side-_3-drm中的基本概念" data-v-b57cc07c>3 DRM中的基本概念</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_3-1-drm-framebuffer" class="sidebar-link reco-side-_3-1-drm-framebuffer" data-v-b57cc07c>3.1 DRM Framebuffer</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_3-2-crtc" class="sidebar-link reco-side-_3-2-crtc" data-v-b57cc07c>3.2 CRTC</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_3-3-planes" class="sidebar-link reco-side-_3-3-planes" data-v-b57cc07c>3.3 Planes</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_3-4-encoder" class="sidebar-link reco-side-_3-4-encoder" data-v-b57cc07c>3.4 Encoder</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_3-5-connector" class="sidebar-link reco-side-_3-5-connector" data-v-b57cc07c>3.5 Connector</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-drm使用示例" class="sidebar-link reco-side-_4-drm使用示例" data-v-b57cc07c>4 DRM使用示例</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-1-打开设备" class="sidebar-link reco-side-_4-1-打开设备" data-v-b57cc07c>4.1 打开设备</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-2-检查drm的能力" class="sidebar-link reco-side-_4-2-检查drm的能力" data-v-b57cc07c>4.2 检查DRM的能力</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-3-检索resource" class="sidebar-link reco-side-_4-3-检索resource" data-v-b57cc07c>4.3 检索Resource</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-4-获取connector" class="sidebar-link reco-side-_4-4-获取connector" data-v-b57cc07c>4.4 获取Connector</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-5-encoder" class="sidebar-link reco-side-_4-5-encoder" data-v-b57cc07c>4.5 Encoder</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-6-crtc" class="sidebar-link reco-side-_4-6-crtc" data-v-b57cc07c>4.6 CRTC</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-7-framebuffer" class="sidebar-link reco-side-_4-7-framebuffer" data-v-b57cc07c>4.7 FrameBuffer</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-8-crtc的准备" class="sidebar-link reco-side-_4-8-crtc的准备" data-v-b57cc07c>4.8 CRTC的准备</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_4-9-绘制" class="sidebar-link reco-side-_4-9-绘制" data-v-b57cc07c>4.9 绘制</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/linux_drm.html#_5-总结" class="sidebar-link reco-side-_5-总结" data-v-b57cc07c>5 总结</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.389323ad.js" defer></script><script src="/assets/js/3.8cd7b294.js" defer></script><script src="/assets/js/1.2acc022b.js" defer></script><script src="/assets/js/57.ba66cfdf.js" defer></script>
+  </body>
+</html>

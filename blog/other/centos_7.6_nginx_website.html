@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CentOS 7.6基于Nginx静态服务器搭建个人网站 | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js"></script>
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7eaaf838.css" as="style"><link rel="preload" href="/assets/js/app.389323ad.js" as="script"><link rel="preload" href="/assets/js/3.8cd7b294.js" as="script"><link rel="preload" href="/assets/js/1.2acc022b.js" as="script"><link rel="preload" href="/assets/js/18.c5da041e.js" as="script"><link rel="prefetch" href="/assets/js/10.509ef012.js"><link rel="prefetch" href="/assets/js/100.87b48422.js"><link rel="prefetch" href="/assets/js/101.26b12fac.js"><link rel="prefetch" href="/assets/js/102.7bb41561.js"><link rel="prefetch" href="/assets/js/103.9625cf57.js"><link rel="prefetch" href="/assets/js/104.656f8f66.js"><link rel="prefetch" href="/assets/js/105.01e163d8.js"><link rel="prefetch" href="/assets/js/11.c2055ebb.js"><link rel="prefetch" href="/assets/js/12.5b98e285.js"><link rel="prefetch" href="/assets/js/13.da357cb6.js"><link rel="prefetch" href="/assets/js/14.14359ca8.js"><link rel="prefetch" href="/assets/js/15.3f13fc82.js"><link rel="prefetch" href="/assets/js/16.7f349b92.js"><link rel="prefetch" href="/assets/js/17.dfbfd566.js"><link rel="prefetch" href="/assets/js/19.0f9638df.js"><link rel="prefetch" href="/assets/js/20.ebb7267b.js"><link rel="prefetch" href="/assets/js/21.01453e44.js"><link rel="prefetch" href="/assets/js/22.dd08b5d9.js"><link rel="prefetch" href="/assets/js/23.59d3ba1f.js"><link rel="prefetch" href="/assets/js/24.b4851731.js"><link rel="prefetch" href="/assets/js/25.8fe447e5.js"><link rel="prefetch" href="/assets/js/26.ba72535f.js"><link rel="prefetch" href="/assets/js/27.d78e5a7f.js"><link rel="prefetch" href="/assets/js/28.869cfdab.js"><link rel="prefetch" href="/assets/js/29.94d6c0da.js"><link rel="prefetch" href="/assets/js/30.4d578f75.js"><link rel="prefetch" href="/assets/js/31.b176b736.js"><link rel="prefetch" href="/assets/js/32.b0e5c692.js"><link rel="prefetch" href="/assets/js/33.50670ab7.js"><link rel="prefetch" href="/assets/js/34.ca843b26.js"><link rel="prefetch" href="/assets/js/35.9d0a871d.js"><link rel="prefetch" href="/assets/js/36.058658f5.js"><link rel="prefetch" href="/assets/js/37.79702756.js"><link rel="prefetch" href="/assets/js/38.3becf2a9.js"><link rel="prefetch" href="/assets/js/39.ce9c4993.js"><link rel="prefetch" href="/assets/js/4.7234e624.js"><link rel="prefetch" href="/assets/js/40.63f404db.js"><link rel="prefetch" href="/assets/js/41.055093b0.js"><link rel="prefetch" href="/assets/js/42.fdac0499.js"><link rel="prefetch" href="/assets/js/43.eccc4bc3.js"><link rel="prefetch" href="/assets/js/44.15c550df.js"><link rel="prefetch" href="/assets/js/45.e1f3a91a.js"><link rel="prefetch" href="/assets/js/46.2f663949.js"><link rel="prefetch" href="/assets/js/47.e414f8b4.js"><link rel="prefetch" href="/assets/js/48.33742d27.js"><link rel="prefetch" href="/assets/js/49.39d768fb.js"><link rel="prefetch" href="/assets/js/5.c5df887a.js"><link rel="prefetch" href="/assets/js/50.6f7b21d1.js"><link rel="prefetch" href="/assets/js/51.dd0d4797.js"><link rel="prefetch" href="/assets/js/52.d6b486de.js"><link rel="prefetch" href="/assets/js/53.a375da01.js"><link rel="prefetch" href="/assets/js/54.286f4db9.js"><link rel="prefetch" href="/assets/js/55.4eca20c6.js"><link rel="prefetch" href="/assets/js/56.3e29c0fe.js"><link rel="prefetch" href="/assets/js/57.ba66cfdf.js"><link rel="prefetch" href="/assets/js/58.9ab4c356.js"><link rel="prefetch" href="/assets/js/59.f4a92ca7.js"><link rel="prefetch" href="/assets/js/6.c5c0e212.js"><link rel="prefetch" href="/assets/js/60.25abd7f9.js"><link rel="prefetch" href="/assets/js/61.7152649d.js"><link rel="prefetch" href="/assets/js/62.9c19bfc5.js"><link rel="prefetch" href="/assets/js/63.b414f496.js"><link rel="prefetch" href="/assets/js/64.58bc0c9c.js"><link rel="prefetch" href="/assets/js/65.b593055b.js"><link rel="prefetch" href="/assets/js/66.4eb75485.js"><link rel="prefetch" href="/assets/js/67.a110db76.js"><link rel="prefetch" href="/assets/js/68.f4bbae0a.js"><link rel="prefetch" href="/assets/js/69.532ecaf5.js"><link rel="prefetch" href="/assets/js/7.54ced24c.js"><link rel="prefetch" href="/assets/js/70.4a3e45cb.js"><link rel="prefetch" href="/assets/js/71.37d0cbc5.js"><link rel="prefetch" href="/assets/js/72.c19ed0ab.js"><link rel="prefetch" href="/assets/js/73.1e1c5639.js"><link rel="prefetch" href="/assets/js/74.a495e734.js"><link rel="prefetch" href="/assets/js/75.36ed645a.js"><link rel="prefetch" href="/assets/js/76.4eb141f1.js"><link rel="prefetch" href="/assets/js/77.dea7ff9d.js"><link rel="prefetch" href="/assets/js/78.d77bc99b.js"><link rel="prefetch" href="/assets/js/79.e4856393.js"><link rel="prefetch" href="/assets/js/8.e62f1843.js"><link rel="prefetch" href="/assets/js/80.fd65c7a5.js"><link rel="prefetch" href="/assets/js/81.7754f641.js"><link rel="prefetch" href="/assets/js/82.9ab18ada.js"><link rel="prefetch" href="/assets/js/83.06c080f6.js"><link rel="prefetch" href="/assets/js/84.3b801bcb.js"><link rel="prefetch" href="/assets/js/85.f90e359b.js"><link rel="prefetch" href="/assets/js/86.5ae50729.js"><link rel="prefetch" href="/assets/js/87.1fe37ed2.js"><link rel="prefetch" href="/assets/js/88.47071570.js"><link rel="prefetch" href="/assets/js/89.0baa310a.js"><link rel="prefetch" href="/assets/js/9.fd63a988.js"><link rel="prefetch" href="/assets/js/90.714224f5.js"><link rel="prefetch" href="/assets/js/91.fbc0997e.js"><link rel="prefetch" href="/assets/js/92.c1c0a549.js"><link rel="prefetch" href="/assets/js/93.9870265b.js"><link rel="prefetch" href="/assets/js/94.ff12a7de.js"><link rel="prefetch" href="/assets/js/95.976ae2f6.js"><link rel="prefetch" href="/assets/js/96.41f2642f.js"><link rel="prefetch" href="/assets/js/97.65fe8305.js"><link rel="prefetch" href="/assets/js/98.3a87e365.js"><link rel="prefetch" href="/assets/js/99.cc9e61ce.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7eaaf838.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>89</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>24</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#67cc86;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>CentOS 7.6基于Nginx静态服务器搭建个人网站</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">CentOS 7.6基于Nginx静态服务器搭建个人网站</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2022/9/14</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/blog/other/centos_7.6_nginx_website.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>网页</span><span class="tag-item" data-v-8a445198>文档</span><span class="tag-item" data-v-8a445198>VuePress</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1 前言</h2> <p>之前文章 <a href="/blog/other/notes_of_personal_website.html">建站过程中的踩坑记录：自定义域名、百度收录与备案</a> 中提到，我将会把个人网站从 GitHub Pages 迁移到腾讯云服务器，本文就针对这个过程做个笔记。</p> <blockquote><p>备注：我的个人网站是使用 <a href="https://www.vuepress.cn/" target="_blank" rel="noopener noreferrer">VuePress<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 生成的静态网页。</p></blockquote> <h2 id="_2-安装-nginx"><a href="#_2-安装-nginx" class="header-anchor">#</a> 2 安装 Nginx</h2> <p>在安装 Nginx 之前，先看看 yum 的源，执行以下命令：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">cat</span> /etc/yum.repos.d/CentOS-Base.repo
+</code></pre></div><p>输出结果如下：</p> <div class="language-ini extra-class"><pre class="language-ini"><code><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">extras</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">gpgcheck</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">gpgkey</span><span class="token punctuation">=</span><span class="token value attr-value">http://mirrors.tencentyun.com/centos/RPM-GPG-KEY-CentOS-7</span>
+<span class="token key attr-name">enabled</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">baseurl</span><span class="token punctuation">=</span><span class="token value attr-value">http://mirrors.tencentyun.com/centos/$releasever/extras/$basearch/</span>
+<span class="token key attr-name">name</span><span class="token punctuation">=</span><span class="token value attr-value">Qcloud centos extras - $basearch</span>
+<span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">os</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">gpgcheck</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">gpgkey</span><span class="token punctuation">=</span><span class="token value attr-value">http://mirrors.tencentyun.com/centos/RPM-GPG-KEY-CentOS-7</span>
+<span class="token key attr-name">enabled</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">baseurl</span><span class="token punctuation">=</span><span class="token value attr-value">http://mirrors.tencentyun.com/centos/$releasever/os/$basearch/</span>
+<span class="token key attr-name">name</span><span class="token punctuation">=</span><span class="token value attr-value">Qcloud centos os - $basearch</span>
+<span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">updates</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">gpgcheck</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">gpgkey</span><span class="token punctuation">=</span><span class="token value attr-value">http://mirrors.tencentyun.com/centos/RPM-GPG-KEY-CentOS-7</span>
+<span class="token key attr-name">enabled</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">baseurl</span><span class="token punctuation">=</span><span class="token value attr-value">http://mirrors.tencentyun.com/centos/$releasever/updates/$basearch/</span>
+<span class="token key attr-name">name</span><span class="token punctuation">=</span><span class="token value attr-value">Qcloud centos updates - $basearch</span>
+</code></pre></div><p>可以看到由于我买的是腾讯云服务器，所以yum源默认为腾讯源，国内的源比较快，就不用修改了。</p> <blockquote><p>备注：如果源不是国内的话，就自己改一下吧，注意改之前先备份，避免出问题。</p></blockquote> <p>接下来执行以下命令安装 Nginx：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>yum <span class="token function">install</span> nginx
+</code></pre></div><h2 id="_3-启动-nginx"><a href="#_3-启动-nginx" class="header-anchor">#</a> 3 启动 Nginx</h2> <p>安装好后，我们先启动 Nginx 看看效果，命令如下：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>nginx
+</code></pre></div><p>可以执行以下命令在应用程序中看看 Nginx 有没有启动成功：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">top</span> <span class="token parameter variable">-d</span> <span class="token number">1</span>
+</code></pre></div><p>接下来我们直接访问一下服务器的公网 ip 看看，比如我这里的是：119.29.8.163，可以看到以下界面，表示 Nginx 服务器启动成功：</p> <p><img src="/assets/img/start_nginx.af629f97.png" alt="启动 Nginx"></p> <h2 id="_4-配置-nginx"><a href="#_4-配置-nginx" class="header-anchor">#</a> 4 配置 Nginx</h2> <p>启动 Nginx 之后会显示默认网站，如果想要它显示指定的静态网站，需要手动配置。</p> <ol><li><p>首先，我们先把静态网站上传到服务器，比如此处我将静态的 HTML 文件放在 <code>/opt/site</code> 目录中。</p></li> <li><p>进入 Nginx 安装目录：</p></li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /etc/nginx
+</code></pre></div><ol start="3"><li>编辑 <code>nginx.conf</code> 文件和 <code>nginx.conf.default</code> 文件，将 <code>http.server.location /</code> 的 <code>root</code> 指向云服务器中的静态网站文件夹，此处为 <code>/opt/site</code>：</li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code>http <span class="token punctuation">{</span>
+    server <span class="token punctuation">{</span>
+        location / <span class="token punctuation">{</span>
+            root   /opt/site<span class="token punctuation">;</span>            <span class="token comment"># 静态html文件存放目录</span>
+            index  index.html index.htm<span class="token punctuation">;</span> <span class="token comment"># 默认首页</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>配置好后，重启 Nginx</li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code>nginx <span class="token parameter variable">-s</span> reload
+</code></pre></div><p>重启完成后，刷新 119.29.8.163 页面应该就能看到部署的网站了。</p> <h2 id="_5-配置-https-服务"><a href="#_5-配置-https-服务" class="header-anchor">#</a> 5 配置 HTTPS 服务</h2> <h3 id="_5-1-申请-ssl-证书"><a href="#_5-1-申请-ssl-证书" class="header-anchor">#</a> 5.1 申请 SSL 证书</h3> <p>我用的是腾讯云服务器，所以可以直接在腾讯云中申请的 SSL 证书，打开腾讯云控制台的 <a href="https://console.cloud.tencent.com/ssl" target="_blank" rel="noopener noreferrer">SSL 证书页面<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，申请免费证书：</p> <p>注意：</p> <ul><li>免费证书有效期是一年，一年后手动重新申请即可；</li> <li>申请 SSL 证书的域名需要备案。</li></ul> <p><img src="/assets/img/apply_ssl.83b4d335.png" alt="申请 SSL 证书"></p> <p>填写好资料后，提交申请即可：</p> <p><img src="/assets/img/submit_ssl.53790616.png" alt="提交申请"></p> <h3 id="_5-2-下载-ssl-证书"><a href="#_5-2-下载-ssl-证书" class="header-anchor">#</a> 5.2 下载 SSL 证书</h3> <p>申请通过后，可以在腾讯云控制台的 <a href="https://console.cloud.tencent.com/ssl" target="_blank" rel="noopener noreferrer">SSL 证书页面<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 找到对应的证书并下载（注意：下载 Nginx 类型的证书）：</p> <p><img src="/assets/img/download_ssl.6d3be587.png" alt="下载 SSL 证书"></p> <p>下载完成后，得到 liuyuxin.site_nginx.zip 压缩包，解压后目录结构如下：</p> <p><img src="/assets/img/liuyuxin_site_nginx.6de46a4d.png" alt="liuyuxin_site_nginx"></p> <h3 id="_5-3-使用-ssl-证书"><a href="#_5-3-使用-ssl-证书" class="header-anchor">#</a> 5.3 使用 SSL 证书</h3> <p>首先，我们现在腾讯云控制台的 <a href="https://console.cloud.tencent.com/cns" target="_blank" rel="noopener noreferrer">DNS 解析 DNSPod 页面<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，将域名解析到云服务器 IP，这样通过域名就可以访问个人网站了。</p> <p>接着开始配置 SSL 证书，需要上传到 Nginx 服务器的文件如下：</p> <table><thead><tr><th>文件</th> <th>说明</th></tr></thead> <tbody><tr><td>liuyuxin.site_bundle.crt</td> <td>证书文件</td></tr> <tr><td>liuyuxin.site.key</td> <td>私钥文件</td></tr></tbody></table> <p>将这两个文件放到云服务器的 Nginx 安装目录（<code>/etc/nginx</code>）中的 <code>ssl</code> 文件夹中，这个路径可自定义，后续可以在配置文件中指定。</p> <p>编辑 <code>/etc/nginx/nginx.conf</code> 文件，开启 HTTPS 默认端口 443：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>http <span class="token punctuation">{</span>
+    server <span class="token punctuation">{</span>
+        <span class="token comment"># SSL 默认访问端口号为 443</span>
+        listen <span class="token number">443</span> ssl<span class="token punctuation">;</span> 
+        <span class="token comment"># 配置绑定证书的域名</span>
+        server_name liuyuxin.site<span class="token punctuation">;</span> 
+        <span class="token comment"># 配置证书文件的相对路径或绝对路径</span>
+        ssl_certificate <span class="token string">&quot;/etc/nginx/ssl/liuyuxin.site_bundle.crt&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment"># 配置私钥文件的相对路径或绝对路径</span>
+        ssl_certificate_key <span class="token string">&quot;/etc/nginx/ssl/liuyuxin.site.key&quot;</span><span class="token punctuation">;</span> 
+        ssl_session_timeout 5m<span class="token punctuation">;</span>
+        <span class="token comment"># 配置协议</span>
+        ssl_protocols TLSv1.2 TLSv1.3<span class="token punctuation">;</span> 
+        <span class="token comment"># 配置加密套件，写法遵循 openssl 标准</span>
+        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:<span class="token operator">!</span>aNULL:<span class="token operator">!</span>MD5:<span class="token operator">!</span>RC4:<span class="token operator">!</span>DHE<span class="token punctuation">;</span> 
+        ssl_prefer_server_ciphers on<span class="token punctuation">;</span>
+        location / <span class="token punctuation">{</span>
+            <span class="token comment"># 网站主页路径</span>
+            root   /opt/site<span class="token punctuation">;</span>
+            index  index.html index.htm<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>配置好后，执行以下命令验证配置文件问题，返回 ok 则表示配置文件可正常运行：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>nginx <span class="token parameter variable">-t</span>
+</code></pre></div><p>重启 Nginx 服务：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>nginx <span class="token parameter variable">-s</span> reload
+</code></pre></div><p>此时，我们可以通过 HTTPS 协议访问网页了：https://liuyuxin.site/</p> <h3 id="_5-4-http-自动跳转-https"><a href="#_5-4-http-自动跳转-https" class="header-anchor">#</a> 5.4 HTTP 自动跳转 HTTPS</h3> <p>为保证数据安全，我这里将 HTTP 请求自动重定向到了 HTTPS，编辑 <code>/etc/nginx/nginx.conf</code> 文件，新增重定向配置：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>http <span class="token punctuation">{</span>
+    server <span class="token punctuation">{</span>
+        <span class="token comment"># SSL 默认访问端口号为 443</span>
+        listen <span class="token number">443</span> ssl<span class="token punctuation">;</span> 
+        <span class="token comment"># 配置绑定证书的域名</span>
+        server_name liuyuxin.site<span class="token punctuation">;</span> 
+        <span class="token comment"># 配置证书文件的相对路径或绝对路径</span>
+        ssl_certificate <span class="token string">&quot;/etc/nginx/ssl/liuyuxin.site_bundle.crt&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment"># 配置私钥文件的相对路径或绝对路径</span>
+        ssl_certificate_key <span class="token string">&quot;/etc/nginx/ssl/liuyuxin.site.key&quot;</span><span class="token punctuation">;</span> 
+        ssl_session_timeout 5m<span class="token punctuation">;</span>
+        <span class="token comment"># 配置协议</span>
+        ssl_protocols TLSv1.2 TLSv1.3<span class="token punctuation">;</span> 
+        <span class="token comment"># 配置加密套件，写法遵循 openssl 标准</span>
+        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:<span class="token operator">!</span>aNULL:<span class="token operator">!</span>MD5:<span class="token operator">!</span>RC4:<span class="token operator">!</span>DHE<span class="token punctuation">;</span> 
+        ssl_prefer_server_ciphers on<span class="token punctuation">;</span>
+        location / <span class="token punctuation">{</span>
+            <span class="token comment"># 网站主页路径</span>
+            root   /opt/site<span class="token punctuation">;</span>
+            index  index.html index.htm<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    server <span class="token punctuation">{</span>
+        listen <span class="token number">80</span><span class="token punctuation">;</span>
+        <span class="token comment"># 配置绑定证书的域名</span>
+        server_name liuyuxin.site<span class="token punctuation">;</span> 
+        <span class="token comment"># 把 http 的域名请求转成 https</span>
+        <span class="token builtin class-name">return</span> <span class="token number">301</span> https://<span class="token variable">$host</span><span class="token variable">$request_uri</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>配置好后，执行以下命令验证配置文件，并重启 Nginx 服务：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>nginx <span class="token parameter variable">-t</span>
+nginx <span class="token parameter variable">-s</span> reload
+</code></pre></div><h2 id="_6-自动部署"><a href="#_6-自动部署" class="header-anchor">#</a> 6 自动部署</h2> <p>由于手动更新云服务器上的静态网站文件比较麻烦，因此这里我写了一个 shell 脚本自动部署网站，其原理很简单，就是通过 ssh 把 Vuepress 编译生成的静态网页上传到云服务器的指定目录，代码如下：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 确保脚本抛出遇到的错误</span>
+<span class="token builtin class-name">set</span> <span class="token parameter variable">-e</span>
+
+<span class="token comment"># 生成静态网站</span>
+<span class="token function">npm</span> run docs:build
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;==================== build html done ====================&quot;</span>
+
+<span class="token comment"># 清除服务器上的静态网站</span>
+<span class="token function">ssh</span> root@119.29.8.163 <span class="token string">&quot;rm -rf /opt/site&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;==================== clear html done ====================&quot;</span>
+
+<span class="token comment"># 将静态网站部署到服务器</span>
+<span class="token function">scp</span> <span class="token parameter variable">-r</span> ./site root@119.29.8.163:/opt
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;==================== deploy html done ====================&quot;</span>
+</code></pre></div><blockquote><p>注意：该脚本会先清除服务器上原来的网站，再部署新的网站，因此需要输入两次密码。</p></blockquote></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_1-前言" class="sidebar-link reco-side-_1-前言" data-v-b57cc07c>1 前言</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_2-安装-nginx" class="sidebar-link reco-side-_2-安装-nginx" data-v-b57cc07c>2 安装 Nginx</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_3-启动-nginx" class="sidebar-link reco-side-_3-启动-nginx" data-v-b57cc07c>3 启动 Nginx</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_4-配置-nginx" class="sidebar-link reco-side-_4-配置-nginx" data-v-b57cc07c>4 配置 Nginx</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_5-配置-https-服务" class="sidebar-link reco-side-_5-配置-https-服务" data-v-b57cc07c>5 配置 HTTPS 服务</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_5-1-申请-ssl-证书" class="sidebar-link reco-side-_5-1-申请-ssl-证书" data-v-b57cc07c>5.1 申请 SSL 证书</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_5-2-下载-ssl-证书" class="sidebar-link reco-side-_5-2-下载-ssl-证书" data-v-b57cc07c>5.2 下载 SSL 证书</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_5-3-使用-ssl-证书" class="sidebar-link reco-side-_5-3-使用-ssl-证书" data-v-b57cc07c>5.3 使用 SSL 证书</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_5-4-http-自动跳转-https" class="sidebar-link reco-side-_5-4-http-自动跳转-https" data-v-b57cc07c>5.4 HTTP 自动跳转 HTTPS</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/other/centos_7.6_nginx_website.html#_6-自动部署" class="sidebar-link reco-side-_6-自动部署" data-v-b57cc07c>6 自动部署</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.389323ad.js" defer></script><script src="/assets/js/3.8cd7b294.js" defer></script><script src="/assets/js/1.2acc022b.js" defer></script><script src="/assets/js/18.c5da041e.js" defer></script>
+  </body>
+</html>

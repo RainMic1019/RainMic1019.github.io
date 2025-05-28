@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>IOT.js适配AWorks平台通用外设接口（5）：SPI | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js"></script>
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7eaaf838.css" as="style"><link rel="preload" href="/assets/js/app.389323ad.js" as="script"><link rel="preload" href="/assets/js/3.8cd7b294.js" as="script"><link rel="preload" href="/assets/js/1.2acc022b.js" as="script"><link rel="preload" href="/assets/js/56.3e29c0fe.js" as="script"><link rel="prefetch" href="/assets/js/10.509ef012.js"><link rel="prefetch" href="/assets/js/100.87b48422.js"><link rel="prefetch" href="/assets/js/101.26b12fac.js"><link rel="prefetch" href="/assets/js/102.7bb41561.js"><link rel="prefetch" href="/assets/js/103.9625cf57.js"><link rel="prefetch" href="/assets/js/104.656f8f66.js"><link rel="prefetch" href="/assets/js/105.01e163d8.js"><link rel="prefetch" href="/assets/js/11.c2055ebb.js"><link rel="prefetch" href="/assets/js/12.5b98e285.js"><link rel="prefetch" href="/assets/js/13.da357cb6.js"><link rel="prefetch" href="/assets/js/14.14359ca8.js"><link rel="prefetch" href="/assets/js/15.3f13fc82.js"><link rel="prefetch" href="/assets/js/16.7f349b92.js"><link rel="prefetch" href="/assets/js/17.dfbfd566.js"><link rel="prefetch" href="/assets/js/18.c5da041e.js"><link rel="prefetch" href="/assets/js/19.0f9638df.js"><link rel="prefetch" href="/assets/js/20.ebb7267b.js"><link rel="prefetch" href="/assets/js/21.01453e44.js"><link rel="prefetch" href="/assets/js/22.dd08b5d9.js"><link rel="prefetch" href="/assets/js/23.59d3ba1f.js"><link rel="prefetch" href="/assets/js/24.b4851731.js"><link rel="prefetch" href="/assets/js/25.8fe447e5.js"><link rel="prefetch" href="/assets/js/26.ba72535f.js"><link rel="prefetch" href="/assets/js/27.d78e5a7f.js"><link rel="prefetch" href="/assets/js/28.869cfdab.js"><link rel="prefetch" href="/assets/js/29.94d6c0da.js"><link rel="prefetch" href="/assets/js/30.4d578f75.js"><link rel="prefetch" href="/assets/js/31.b176b736.js"><link rel="prefetch" href="/assets/js/32.b0e5c692.js"><link rel="prefetch" href="/assets/js/33.50670ab7.js"><link rel="prefetch" href="/assets/js/34.ca843b26.js"><link rel="prefetch" href="/assets/js/35.9d0a871d.js"><link rel="prefetch" href="/assets/js/36.058658f5.js"><link rel="prefetch" href="/assets/js/37.79702756.js"><link rel="prefetch" href="/assets/js/38.3becf2a9.js"><link rel="prefetch" href="/assets/js/39.ce9c4993.js"><link rel="prefetch" href="/assets/js/4.7234e624.js"><link rel="prefetch" href="/assets/js/40.63f404db.js"><link rel="prefetch" href="/assets/js/41.055093b0.js"><link rel="prefetch" href="/assets/js/42.fdac0499.js"><link rel="prefetch" href="/assets/js/43.eccc4bc3.js"><link rel="prefetch" href="/assets/js/44.15c550df.js"><link rel="prefetch" href="/assets/js/45.e1f3a91a.js"><link rel="prefetch" href="/assets/js/46.2f663949.js"><link rel="prefetch" href="/assets/js/47.e414f8b4.js"><link rel="prefetch" href="/assets/js/48.33742d27.js"><link rel="prefetch" href="/assets/js/49.39d768fb.js"><link rel="prefetch" href="/assets/js/5.c5df887a.js"><link rel="prefetch" href="/assets/js/50.6f7b21d1.js"><link rel="prefetch" href="/assets/js/51.dd0d4797.js"><link rel="prefetch" href="/assets/js/52.d6b486de.js"><link rel="prefetch" href="/assets/js/53.a375da01.js"><link rel="prefetch" href="/assets/js/54.286f4db9.js"><link rel="prefetch" href="/assets/js/55.4eca20c6.js"><link rel="prefetch" href="/assets/js/57.ba66cfdf.js"><link rel="prefetch" href="/assets/js/58.9ab4c356.js"><link rel="prefetch" href="/assets/js/59.f4a92ca7.js"><link rel="prefetch" href="/assets/js/6.c5c0e212.js"><link rel="prefetch" href="/assets/js/60.25abd7f9.js"><link rel="prefetch" href="/assets/js/61.7152649d.js"><link rel="prefetch" href="/assets/js/62.9c19bfc5.js"><link rel="prefetch" href="/assets/js/63.b414f496.js"><link rel="prefetch" href="/assets/js/64.58bc0c9c.js"><link rel="prefetch" href="/assets/js/65.b593055b.js"><link rel="prefetch" href="/assets/js/66.4eb75485.js"><link rel="prefetch" href="/assets/js/67.a110db76.js"><link rel="prefetch" href="/assets/js/68.f4bbae0a.js"><link rel="prefetch" href="/assets/js/69.532ecaf5.js"><link rel="prefetch" href="/assets/js/7.54ced24c.js"><link rel="prefetch" href="/assets/js/70.4a3e45cb.js"><link rel="prefetch" href="/assets/js/71.37d0cbc5.js"><link rel="prefetch" href="/assets/js/72.c19ed0ab.js"><link rel="prefetch" href="/assets/js/73.1e1c5639.js"><link rel="prefetch" href="/assets/js/74.a495e734.js"><link rel="prefetch" href="/assets/js/75.36ed645a.js"><link rel="prefetch" href="/assets/js/76.4eb141f1.js"><link rel="prefetch" href="/assets/js/77.dea7ff9d.js"><link rel="prefetch" href="/assets/js/78.d77bc99b.js"><link rel="prefetch" href="/assets/js/79.e4856393.js"><link rel="prefetch" href="/assets/js/8.e62f1843.js"><link rel="prefetch" href="/assets/js/80.fd65c7a5.js"><link rel="prefetch" href="/assets/js/81.7754f641.js"><link rel="prefetch" href="/assets/js/82.9ab18ada.js"><link rel="prefetch" href="/assets/js/83.06c080f6.js"><link rel="prefetch" href="/assets/js/84.3b801bcb.js"><link rel="prefetch" href="/assets/js/85.f90e359b.js"><link rel="prefetch" href="/assets/js/86.5ae50729.js"><link rel="prefetch" href="/assets/js/87.1fe37ed2.js"><link rel="prefetch" href="/assets/js/88.47071570.js"><link rel="prefetch" href="/assets/js/89.0baa310a.js"><link rel="prefetch" href="/assets/js/9.fd63a988.js"><link rel="prefetch" href="/assets/js/90.714224f5.js"><link rel="prefetch" href="/assets/js/91.fbc0997e.js"><link rel="prefetch" href="/assets/js/92.c1c0a549.js"><link rel="prefetch" href="/assets/js/93.9870265b.js"><link rel="prefetch" href="/assets/js/94.ff12a7de.js"><link rel="prefetch" href="/assets/js/95.976ae2f6.js"><link rel="prefetch" href="/assets/js/96.41f2642f.js"><link rel="prefetch" href="/assets/js/97.65fe8305.js"><link rel="prefetch" href="/assets/js/98.3a87e365.js"><link rel="prefetch" href="/assets/js/99.cc9e61ce.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7eaaf838.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>89</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>24</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#67cc86;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>IOT.js适配AWorks平台通用外设接口（5）：SPI</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">IOT.js适配AWorks平台通用外设接口（5）：SPI</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2022/5/1</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/blog/embedded/iotjs_aworks_spi.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>C</span><span class="tag-item" data-v-8a445198>嵌入式</span><span class="tag-item" data-v-8a445198>AWorks</span><span class="tag-item" data-v-8a445198>IOT.js</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1 前言</h2> <p>近期因工作需求学习了一下 IOT.js 和 AWorks 平台通用外设接口（包括：ADC、GPIO、I2C、PWM、SPI 和 UART），并将它们逐一适配到 IOT.js 中，为后续 <a href="https://github.com/zlgopen/awtk-mvvm" target="_blank" rel="noopener noreferrer">AWTK-MVMM<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 的 JS项目支持平台外设调用奠定基础，此处做笔记记录一下。</p> <ul><li><a href="/blog/embedded/iotjs_aworks_adc.html">IOT.js适配AWorks平台通用外设接口（1）：ADC</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_gpio.html">IOT.js适配AWorks平台通用外设接口（2）：GPIO</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_i2c.html">IOT.js适配AWorks平台通用外设接口（3）：I2C</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_pwm.html">IOT.js适配AWorks平台通用外设接口（4）：PWM</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_spi.html" aria-current="page" class="router-link-exact-active router-link-active">IOT.js适配AWorks平台通用外设接口（5）：SPI</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_uart.html">IOT.js适配AWorks平台通用外设接口（6）：UART</a>；</li></ul> <blockquote><p>备注：IOT.js 和 AWorks 的相关介绍请看第一篇 ADC 适配笔记。</p></blockquote> <h2 id="_2-spi"><a href="#_2-spi" class="header-anchor">#</a> 2 SPI</h2> <h3 id="_2-1-spi总线"><a href="#_2-1-spi总线" class="header-anchor">#</a> 2.1 SPI总线</h3> <p>SPI(Serial Peripheral Interface)是一种全双工同步串行通信接口，常用于短距离高速通信，其数据传输速率通常可达到几M甚至几十M。SPI通信采用主/从结构，主/从双方通信时，需要使用到4根信号线：SCLK、MOSI、MISO、CS。其典型的连接示意图如下：</p> <p><img src="/assets/img/flow.b05f7dfb.png" alt="连接示意图"></p> <ul><li>SCLK：时钟信号，由主机设备产生。</li> <li>MOSI：主机数据输出，从机数据输入。</li> <li>MISO：从机数据输出，主机数据输入。</li> <li>CS：片选信号，由主设备控制。</li></ul> <p>数据传输是由主机发起，主机在串行数据传输前驱动CS信号，使之变为有效状态（通常情况下，有效状态为低电平），接着，在SCLK上输出时钟信号，在时钟信号的同步下，每个时钟传输一位数据，主机数据通过MOSI传输至从机，从机数据通过MISO传输至主机，数据传输完毕后，主机释放CS信号，使之变为无效状态，一次数据传输完成。</p> <p>一个主机可以连接多个从机，多个从机共同使用SCLK、MOSI、MISO三根信号线，每个从机的片选信号 CS 是独立的，因此，若主机连接多个从机，就需要多个片选控制引脚。当一个主机连接多个从机时，同一时刻最多只能使一个片选信号有效，以选择一个确定的从机作为数据通信的目标对象，也就是说，在某一时刻，最多只能激活寻址一个从机，以使各个从机之间相互独立的使用，互不干扰。注意没在单个通信网络中，可以有多个从机，但有且只能有一个主机。</p> <h3 id="_2-2-spi接口"><a href="#_2-2-spi接口" class="header-anchor">#</a> 2.2 SPI接口</h3> <p>绝大部分情况下，MCU都作为SPI主机与SPI从机器件通信，因此这里仅介绍 AWorks中将MCU作为SPI主机的相关接口：</p> <ul><li>aw_spi_mkdev：初始化SPI从机实例。</li> <li>aw_spi_setup：设置SPI从机实例。</li> <li>aw_spi_write_then_read：SPI先写后读。</li> <li>aw_spi_write_then_write：执行SPI两次写。</li></ul> <h2 id="_3-适配过程"><a href="#_3-适配过程" class="header-anchor">#</a> 3 适配过程</h2> <h3 id="_3-1-aworks演示代码"><a href="#_3-1-aworks演示代码" class="header-anchor">#</a> 3.1 AWorks演示代码</h3> <p>先来看看这些SPI相关接口的基本用法，我们在底板上跑一下简单的例程。</p> <p>步骤一：外设使能，在AWorks工程配置文件 <code>aw_prj_params.h</code> 中开启以下宏定义使能SPI：</p> <div class="language-c extra-class"><pre class="language-c"><code> <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AW_DEV_IMX1050_LPSPI3</span> <span class="token comment">/**&lt; \brief iMX1050 LPSPI3 (SPI3) */</span></span>
+</code></pre></div><p>步骤二：到外设文件中查看设备对应的引脚，比如这里查看 <code>awbl_hwconf_imx1050_lpspi3.h</code> 文件，可以看到该SPI3设备的CS、MISO、MOSI、SCK分别使用GPIO1_28、GPIO1_29、GPIO1_30、GPIO1_31引脚，分别对应底板上的ss、MISO、MOSI、CLK引脚，我们需确定这些引脚能正常使用。</p> <p>步骤三：编写例程，测试SPI主机模式的基本读写功能。示例代码如下：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aworks.h&quot;</span>         <span class="token comment">/* 此头文件必须被首先包含 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_delay.h&quot;</span>       <span class="token comment">/* 延时服务 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_spi.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_gpio.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_vdebug.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_demo_config.h&quot;</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">HARD_CS_CFG</span>          <span class="token expression"><span class="token number">1</span></span></span>
+<span class="token comment">//#define SOFT_CS_CFG          1 /* 使用软件CS请打开spi配置文件，关闭硬件CS模式*/</span>
+
+<span class="token comment">/** \brief SPI1的配置 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SPI_DEV_BUSID</span>        <span class="token expression">DE_SPI_DEV_BUSID       </span><span class="token comment">/**&lt; \brief SPI总线 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SPI_DEV_MODE</span>         <span class="token expression">AW_SPI_CPHA            </span><span class="token comment">/**&lt; \brief SPI模式 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SPI_DEV_SPEED</span>        <span class="token expression"><span class="token number">2000000</span>                </span><span class="token comment">/**&lt; \brief SPI速度 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SPI_DEV_BPW</span>          <span class="token expression"><span class="token number">8</span>                     </span><span class="token comment">/**&lt; \brief SPI数据位数，取值只能是8、16、32 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SPI_TEST_LEN</span>         <span class="token expression"><span class="token number">16</span>                     </span><span class="token comment">/**&lt; \brief SPI收发数据量 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SPI_CS_PIN</span>           <span class="token expression">DE_SPI_CS_PIN          </span><span class="token comment">/**&lt; \brief SPI片选引脚，根据具体平台修改 */</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">aw_spi_message</span>       spi_msg<span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">aw_spi_transfer</span>      spi_trans<span class="token punctuation">;</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">HARD_CS_CFG</span></span>
+<span class="token keyword">void</span> <span class="token function">pfunc_cs</span> <span class="token punctuation">(</span><span class="token keyword">int</span> state<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token comment">/*
+ * \brief 测试SPI主机模式的基本读写功能
+ */</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">aw_spi_device_t</span>     spi_dev<span class="token punctuation">;</span>
+    <span class="token keyword">int</span>                 ret<span class="token punctuation">;</span>
+    <span class="token keyword">int</span>                 i<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">SPI_DEV_BPW <span class="token operator">==</span> <span class="token number">8</span></span></span>
+    <span class="token class-name">uint8_t</span>             read_buf<span class="token punctuation">[</span>SPI_TEST_LEN<span class="token punctuation">]</span>  <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token class-name">uint8_t</span>             write_buf<span class="token punctuation">[</span>SPI_TEST_LEN<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">elif</span> <span class="token expression">SPI_DEV_BPW <span class="token operator">==</span> <span class="token number">16</span></span></span>
+    <span class="token class-name">uint16_t</span>             read_buf<span class="token punctuation">[</span>SPI_TEST_LEN<span class="token punctuation">]</span>  <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token class-name">uint16_t</span>             write_buf<span class="token punctuation">[</span>SPI_TEST_LEN<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">elif</span> <span class="token expression">SPI_DEV_BPW <span class="token operator">==</span> <span class="token number">32</span></span></span>
+    <span class="token class-name">uint32_t</span>             read_buf<span class="token punctuation">[</span>SPI_TEST_LEN<span class="token punctuation">]</span>  <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>             write_buf<span class="token punctuation">[</span>SPI_TEST_LEN<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">SOFT_CS_CFG</span></span>
+    <span class="token keyword">int</span>                 cs_pin <span class="token operator">=</span> SPI_CS_PIN<span class="token punctuation">;</span>
+    <span class="token comment">/* 配置SPI之前需先申请CS引脚 */</span>
+    <span class="token function">aw_gpio_pin_request</span><span class="token punctuation">(</span><span class="token string">&quot;spi_demo_cs&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>cs_pin<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+    <span class="token comment">/* 生成 SPI FLASH 设备 */</span>
+    <span class="token function">aw_spi_mkdev</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>spi_dev<span class="token punctuation">,</span>
+                  SPI_DEV_BUSID<span class="token punctuation">,</span>   <span class="token comment">/* 位于哪条SPI总线上 */</span>
+                  SPI_DEV_BPW<span class="token punctuation">,</span>     <span class="token comment">/* 字大小 */</span>
+                  SPI_DEV_MODE<span class="token punctuation">,</span>    <span class="token comment">/* SPI 模式 */</span>
+                  SPI_DEV_SPEED<span class="token punctuation">,</span>   <span class="token comment">/* 支持的最大速度 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">HARD_CS_CFG</span></span>
+                  <span class="token constant">NULL</span><span class="token punctuation">,</span>            <span class="token comment">/* 片选引脚 */</span>
+                  pfunc_cs<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">/* 无自定义的片选控制函数 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+                  cs_pin<span class="token punctuation">,</span>          <span class="token comment">/* 片选引脚 */</span>
+                  <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">/* 无自定义的片选控制函数 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">aw_spi_setup</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>spi_dev<span class="token punctuation">)</span> <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;aw_spi_setup fail!\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">goto</span> _exit <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token comment">/* 设置发送数据 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SPI_TEST_LEN<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        write_buf<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">memset</span><span class="token punctuation">(</span>read_buf<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>SPI_TEST_LEN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">/* 传输数据 */</span>
+        ret <span class="token operator">=</span> <span class="token function">aw_spi_write_and_read</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>spi_dev<span class="token punctuation">,</span> write_buf<span class="token punctuation">,</span> read_buf<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>write_buf<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;__spi_trans fail!\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">goto</span> _exit <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;write_buf:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SPI_TEST_LEN<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;%d &quot;</span><span class="token punctuation">,</span>write_buf<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;read_buf:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SPI_TEST_LEN<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;%d &quot;</span><span class="token punctuation">,</span>read_buf<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">aw_mdelay</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+_exit<span class="token operator">:</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">SOFT_CS_CFG</span></span>
+    <span class="token comment">/* 测试完成后释放CS引脚 */</span>
+    <span class="token function">aw_gpio_pin_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cs_pin<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>write_buf:0 <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span> <span class="token number">10</span> <span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span> <span class="token number">14</span> <span class="token number">15</span>
+read_buf:0 <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span> <span class="token number">10</span> <span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span> <span class="token number">14</span> <span class="token number">15</span>
+</code></pre></div><h3 id="_3-2-c语言适配层"><a href="#_3-2-c语言适配层" class="header-anchor">#</a> 3.2 C语言适配层</h3> <p>在 IOT.js 中，适配某个平台的外设通常需要实现 <code>src/modules/iotjs_module_xxx.h</code> 文件中的接口，比如这里我们需要实现 <code>iotjs_module_spi.h</code> 中的相关接口：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">IOTJS_MODULE_SPI_H</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">IOTJS_MODULE_SPI_H</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_def.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_module_buffer.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_module_periph_common.h&quot;</span></span>
+
+
+<span class="token keyword">typedef</span> <span class="token keyword">enum</span> <span class="token punctuation">{</span>
+  kSpiMode_0<span class="token punctuation">,</span>
+  kSpiMode_1<span class="token punctuation">,</span>
+  kSpiMode_2<span class="token punctuation">,</span>
+  kSpiMode_3<span class="token punctuation">,</span>
+  __kSpiModeMax
+<span class="token punctuation">}</span> SpiMode<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">enum</span> <span class="token punctuation">{</span> kSpiCsNone<span class="token punctuation">,</span> kSpiCsHigh<span class="token punctuation">,</span> __kSpiCsMax <span class="token punctuation">}</span> SpiChipSelect<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">enum</span> <span class="token punctuation">{</span> kSpiOrderMsb<span class="token punctuation">,</span> kSpiOrderLsb<span class="token punctuation">,</span> __kSpiOrderMax <span class="token punctuation">}</span> SpiOrder<span class="token punctuation">;</span>
+
+<span class="token comment">// Forward declaration of platform data. These are only used by platform code.</span>
+<span class="token comment">// Generic SPI module never dereferences platform data pointer.</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">iotjs_spi_platform_data_s</span> <span class="token class-name">iotjs_spi_platform_data_t</span><span class="token punctuation">;</span>
+<span class="token comment">// This SPI class provides interfaces for SPI operation.</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  <span class="token class-name">jerry_value_t</span> jobject<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_spi_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">;</span>
+
+  SpiMode mode<span class="token punctuation">;</span>
+  SpiChipSelect chip_select<span class="token punctuation">;</span>
+  SpiOrder bit_order<span class="token punctuation">;</span>
+  <span class="token class-name">uint8_t</span> bits_per_word<span class="token punctuation">;</span>
+  <span class="token class-name">uint16_t</span> delay<span class="token punctuation">;</span>
+  <span class="token class-name">uint32_t</span> max_speed<span class="token punctuation">;</span>
+  bool loopback<span class="token punctuation">;</span>
+
+  <span class="token comment">// SPI buffer</span>
+  <span class="token keyword">char</span><span class="token operator">*</span> tx_buf_data<span class="token punctuation">;</span>
+  <span class="token keyword">char</span><span class="token operator">*</span> rx_buf_data<span class="token punctuation">;</span>
+  <span class="token class-name">uint8_t</span> buf_len<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token class-name">iotjs_spi_t</span><span class="token punctuation">;</span>
+
+<span class="token class-name">jerry_value_t</span> <span class="token function">iotjs_spi_set_platform_config</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">,</span>
+                                            <span class="token keyword">const</span> <span class="token class-name">jerry_value_t</span> jconfig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_spi_open</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_spi_transfer</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_spi_close</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Platform-related functions; they are implemented</span>
+<span class="token comment">// by platform code (i.e.: linux, nuttx, tizen).</span>
+<span class="token keyword">void</span> <span class="token function">iotjs_spi_create_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">iotjs_spi_destroy_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_platform_data_t</span><span class="token operator">*</span> pdata<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* IOTJS_MODULE_SPI_H */</span></span>
+</code></pre></div><p>适配层（<code>src/modules/aworks/iotjs_module_spi-aworks.c</code>）代码如下：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token operator">!</span><span class="token function">defined</span><span class="token punctuation">(</span>WITH_AWORKS<span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">error</span> <span class="token string">&quot;Module __FILE__ is for AWorks only&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_def.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_spi.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;modules/iotjs_module_spi.h&quot;</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">iotjs_spi_platform_data_s</span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> bus<span class="token punctuation">;</span>
+  <span class="token class-name">aw_spi_device_t</span> spi_dev<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">mode_to_constant</span><span class="token punctuation">(</span>SpiMode mode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>mode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> kSpiMode_0<span class="token operator">:</span>
+      <span class="token keyword">return</span> AW_SPI_MODE_0<span class="token punctuation">;</span>
+    <span class="token keyword">case</span> kSpiMode_1<span class="token operator">:</span>
+      <span class="token keyword">return</span> AW_SPI_MODE_1<span class="token punctuation">;</span>
+    <span class="token keyword">case</span> kSpiMode_2<span class="token operator">:</span>
+      <span class="token keyword">return</span> AW_SPI_MODE_2<span class="token punctuation">;</span>
+    <span class="token keyword">case</span> kSpiMode_3<span class="token operator">:</span>
+      <span class="token keyword">return</span> AW_SPI_MODE_3<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">clip_select_to_constant</span><span class="token punctuation">(</span>SpiOrder order<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>order<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> kSpiCsNone<span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> kSpiCsHigh<span class="token operator">:</span>
+      <span class="token keyword">return</span> AW_SPI_CS_HIGH<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">order_to_constant</span><span class="token punctuation">(</span>SpiOrder order<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>order<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> kSpiOrderMsb<span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> kSpiOrderLsb<span class="token operator">:</span>
+      <span class="token keyword">return</span> AW_SPI_LSB_FIRST<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">pfunc_cs</span><span class="token punctuation">(</span><span class="token keyword">int</span> state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">iotjs_spi_create_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  spi<span class="token operator">-&gt;</span>platform_data <span class="token operator">=</span> <span class="token function">IOTJS_ALLOC</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_platform_data_t</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  spi<span class="token operator">-&gt;</span>platform_data<span class="token operator">-&gt;</span>bus <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">iotjs_spi_destroy_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">IOTJS_ASSERT</span><span class="token punctuation">(</span>platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">IOTJS_RELEASE</span><span class="token punctuation">(</span>platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token class-name">jerry_value_t</span> <span class="token function">iotjs_spi_set_platform_config</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">,</span>
+                                            <span class="token keyword">const</span> <span class="token class-name">jerry_value_t</span> jconfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">iotjs_spi_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> spi<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+  <span class="token function">JS_GET_REQUIRED_CONF_VALUE</span><span class="token punctuation">(</span>jconfig<span class="token punctuation">,</span> platform_data<span class="token operator">-&gt;</span>bus<span class="token punctuation">,</span>
+                             IOTJS_MAGIC_STRING_BUS<span class="token punctuation">,</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token function">jerry_create_undefined</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_spi_open</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">aw_err_t</span> ret<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> mode<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> order<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> clip_select<span class="token punctuation">;</span>
+  <span class="token class-name">uint16_t</span> flags<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_spi_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> spi<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+
+  mode <span class="token operator">=</span> <span class="token function">mode_to_constant</span><span class="token punctuation">(</span>spi<span class="token operator">-&gt;</span>mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  order <span class="token operator">=</span> <span class="token function">order_to_constant</span><span class="token punctuation">(</span>spi<span class="token operator">-&gt;</span>bit_order<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  clip_select <span class="token operator">=</span> <span class="token function">order_to_constant</span><span class="token punctuation">(</span>spi<span class="token operator">-&gt;</span>chip_select<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>mode <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> order <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> clip_select <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: spi open error: bad config param.&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  flags <span class="token operator">=</span> mode <span class="token operator">|</span> order <span class="token operator">|</span> clip_select<span class="token punctuation">;</span>
+  <span class="token function">aw_spi_mkdev</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>spi_dev<span class="token punctuation">,</span> <span class="token comment">/* SPI设备实例 */</span>
+               platform_data<span class="token operator">-&gt;</span>bus<span class="token punctuation">,</span>      <span class="token comment">/* SPI总线编号 */</span>
+               spi<span class="token operator">-&gt;</span>bits_per_word<span class="token punctuation">,</span>      <span class="token comment">/* 数据位宽 */</span>
+               flags<span class="token punctuation">,</span>                   <span class="token comment">/* 设备模式标志 */</span>
+               spi<span class="token operator">-&gt;</span>max_speed<span class="token punctuation">,</span>          <span class="token comment">/* 支持最大速度 */</span>
+               <span class="token number">0</span><span class="token punctuation">,</span>                       <span class="token comment">/* 片选引脚（这里使用硬件片选） */</span>
+               pfunc_cs                 <span class="token comment">/* 片选控制函数（为NULL时使用软件片选） */</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  ret <span class="token operator">=</span> <span class="token function">aw_spi_setup</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>spi_dev<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>spi_dev<span class="token punctuation">,</span> <span class="token number">0x00</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token class-name">aw_spi_device_t</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: spi setup error(%d)&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">DDLOG</span><span class="token punctuation">(</span>
+      <span class="token string">&quot;SPI Options \n mode: %d\n chipSelect: %d\n bitOrder: %d\n &quot;</span>
+      <span class="token string">&quot;maxSpeed: %d\n bitPerWord: %d\n&quot;</span><span class="token punctuation">,</span>
+      spi<span class="token operator">-&gt;</span>mode<span class="token punctuation">,</span> spi<span class="token operator">-&gt;</span>chip_select<span class="token punctuation">,</span> spi<span class="token operator">-&gt;</span>bit_order<span class="token punctuation">,</span> spi<span class="token operator">-&gt;</span>max_speed<span class="token punctuation">,</span>
+      spi<span class="token operator">-&gt;</span>bits_per_word<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_spi_transfer</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">aw_err_t</span> ret<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_spi_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> spi<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+
+  ret <span class="token operator">=</span> <span class="token function">aw_spi_write_and_read</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>spi_dev<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>spi<span class="token operator">-&gt;</span>tx_buf_data<span class="token punctuation">,</span>
+                              <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>spi<span class="token operator">-&gt;</span>rx_buf_data<span class="token punctuation">,</span> spi<span class="token operator">-&gt;</span>buf_len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">DDLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s - transfer failed: %d&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_spi_close</span><span class="token punctuation">(</span><span class="token class-name">iotjs_spi_t</span><span class="token operator">*</span> spi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">iotjs_spi_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> spi<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+
+  platform_data<span class="token operator">-&gt;</span>bus <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>spi_dev<span class="token punctuation">,</span> <span class="token number">0x00</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token class-name">aw_spi_device_t</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_3-2-js测试代码"><a href="#_3-2-js测试代码" class="header-anchor">#</a> 3.2 JS测试代码</h3> <p>适配好后，我们编写 JS 代码测试一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> spi <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'spi'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> configuration <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">bus</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>            <span class="token comment">/* 使用SPI3的总线编号 */</span>
+  <span class="token literal-property property">mode</span><span class="token operator">:</span> spi<span class="token punctuation">.</span><span class="token constant">MODE</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">/* 模式一 */</span>
+  <span class="token literal-property property">maxSpeed</span><span class="token operator">:</span> <span class="token number">2000000</span><span class="token punctuation">,</span> <span class="token comment">/* 单位：Hz，表示最大速度2M */</span>
+  <span class="token literal-property property">bitsPerWord</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>    <span class="token comment">/* 数据位宽（目前仅支持8位） */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'test start'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> spiObj <span class="token operator">=</span> spi<span class="token punctuation">.</span><span class="token function">openSync</span><span class="token punctuation">(</span>configuration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token string">'Hello Iotjs!'</span><span class="token punctuation">;</span>                          <span class="token comment">/* 发送字符串 */</span>
+<span class="token comment">// var data = [0x90, 0x00, 0x00, 0x00, 0xff, 0xff]; /* 发送数组（该指令用来获取从机ID，需要配套的SPI从机芯片） */</span>
+<span class="token keyword">var</span> tx <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Buffer</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> loopCnt <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> loop <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> rx <span class="token operator">=</span> spiObj<span class="token punctuation">.</span><span class="token function">transferSync</span><span class="token punctuation">(</span>tx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> len <span class="token operator">=</span> data<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'data.length: '</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> value <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// console.log(rx[i]);  /* 打印读取数据的原始值 */</span>
+    value <span class="token operator">+=</span> String<span class="token punctuation">.</span><span class="token function">fromCharCode</span><span class="token punctuation">(</span>rx<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">--</span>loopCnt <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">clearInterval</span><span class="token punctuation">(</span>loop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    spiObj<span class="token punctuation">.</span><span class="token function">closeSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'test complete'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">test</span> start
+data.length:12
+Hello Iotjs<span class="token operator">!</span>
+<span class="token builtin class-name">test</span> complete
+</code></pre></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_1-前言" class="sidebar-link reco-side-_1-前言" data-v-b57cc07c>1 前言</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_2-spi" class="sidebar-link reco-side-_2-spi" data-v-b57cc07c>2 SPI</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_2-1-spi总线" class="sidebar-link reco-side-_2-1-spi总线" data-v-b57cc07c>2.1 SPI总线</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_2-2-spi接口" class="sidebar-link reco-side-_2-2-spi接口" data-v-b57cc07c>2.2 SPI接口</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_3-适配过程" class="sidebar-link reco-side-_3-适配过程" data-v-b57cc07c>3 适配过程</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_3-1-aworks演示代码" class="sidebar-link reco-side-_3-1-aworks演示代码" data-v-b57cc07c>3.1 AWorks演示代码</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_3-2-c语言适配层" class="sidebar-link reco-side-_3-2-c语言适配层" data-v-b57cc07c>3.2 C语言适配层</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_spi.html#_3-2-js测试代码" class="sidebar-link reco-side-_3-2-js测试代码" data-v-b57cc07c>3.2 JS测试代码</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.389323ad.js" defer></script><script src="/assets/js/3.8cd7b294.js" defer></script><script src="/assets/js/1.2acc022b.js" defer></script><script src="/assets/js/56.3e29c0fe.js" defer></script>
+  </body>
+</html>

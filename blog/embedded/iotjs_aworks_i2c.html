@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>IOT.js适配AWorks平台通用外设接口（3）：I2C | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js"></script>
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7eaaf838.css" as="style"><link rel="preload" href="/assets/js/app.389323ad.js" as="script"><link rel="preload" href="/assets/js/3.8cd7b294.js" as="script"><link rel="preload" href="/assets/js/1.2acc022b.js" as="script"><link rel="preload" href="/assets/js/74.a495e734.js" as="script"><link rel="prefetch" href="/assets/js/10.509ef012.js"><link rel="prefetch" href="/assets/js/100.87b48422.js"><link rel="prefetch" href="/assets/js/101.26b12fac.js"><link rel="prefetch" href="/assets/js/102.7bb41561.js"><link rel="prefetch" href="/assets/js/103.9625cf57.js"><link rel="prefetch" href="/assets/js/104.656f8f66.js"><link rel="prefetch" href="/assets/js/105.01e163d8.js"><link rel="prefetch" href="/assets/js/11.c2055ebb.js"><link rel="prefetch" href="/assets/js/12.5b98e285.js"><link rel="prefetch" href="/assets/js/13.da357cb6.js"><link rel="prefetch" href="/assets/js/14.14359ca8.js"><link rel="prefetch" href="/assets/js/15.3f13fc82.js"><link rel="prefetch" href="/assets/js/16.7f349b92.js"><link rel="prefetch" href="/assets/js/17.dfbfd566.js"><link rel="prefetch" href="/assets/js/18.c5da041e.js"><link rel="prefetch" href="/assets/js/19.0f9638df.js"><link rel="prefetch" href="/assets/js/20.ebb7267b.js"><link rel="prefetch" href="/assets/js/21.01453e44.js"><link rel="prefetch" href="/assets/js/22.dd08b5d9.js"><link rel="prefetch" href="/assets/js/23.59d3ba1f.js"><link rel="prefetch" href="/assets/js/24.b4851731.js"><link rel="prefetch" href="/assets/js/25.8fe447e5.js"><link rel="prefetch" href="/assets/js/26.ba72535f.js"><link rel="prefetch" href="/assets/js/27.d78e5a7f.js"><link rel="prefetch" href="/assets/js/28.869cfdab.js"><link rel="prefetch" href="/assets/js/29.94d6c0da.js"><link rel="prefetch" href="/assets/js/30.4d578f75.js"><link rel="prefetch" href="/assets/js/31.b176b736.js"><link rel="prefetch" href="/assets/js/32.b0e5c692.js"><link rel="prefetch" href="/assets/js/33.50670ab7.js"><link rel="prefetch" href="/assets/js/34.ca843b26.js"><link rel="prefetch" href="/assets/js/35.9d0a871d.js"><link rel="prefetch" href="/assets/js/36.058658f5.js"><link rel="prefetch" href="/assets/js/37.79702756.js"><link rel="prefetch" href="/assets/js/38.3becf2a9.js"><link rel="prefetch" href="/assets/js/39.ce9c4993.js"><link rel="prefetch" href="/assets/js/4.7234e624.js"><link rel="prefetch" href="/assets/js/40.63f404db.js"><link rel="prefetch" href="/assets/js/41.055093b0.js"><link rel="prefetch" href="/assets/js/42.fdac0499.js"><link rel="prefetch" href="/assets/js/43.eccc4bc3.js"><link rel="prefetch" href="/assets/js/44.15c550df.js"><link rel="prefetch" href="/assets/js/45.e1f3a91a.js"><link rel="prefetch" href="/assets/js/46.2f663949.js"><link rel="prefetch" href="/assets/js/47.e414f8b4.js"><link rel="prefetch" href="/assets/js/48.33742d27.js"><link rel="prefetch" href="/assets/js/49.39d768fb.js"><link rel="prefetch" href="/assets/js/5.c5df887a.js"><link rel="prefetch" href="/assets/js/50.6f7b21d1.js"><link rel="prefetch" href="/assets/js/51.dd0d4797.js"><link rel="prefetch" href="/assets/js/52.d6b486de.js"><link rel="prefetch" href="/assets/js/53.a375da01.js"><link rel="prefetch" href="/assets/js/54.286f4db9.js"><link rel="prefetch" href="/assets/js/55.4eca20c6.js"><link rel="prefetch" href="/assets/js/56.3e29c0fe.js"><link rel="prefetch" href="/assets/js/57.ba66cfdf.js"><link rel="prefetch" href="/assets/js/58.9ab4c356.js"><link rel="prefetch" href="/assets/js/59.f4a92ca7.js"><link rel="prefetch" href="/assets/js/6.c5c0e212.js"><link rel="prefetch" href="/assets/js/60.25abd7f9.js"><link rel="prefetch" href="/assets/js/61.7152649d.js"><link rel="prefetch" href="/assets/js/62.9c19bfc5.js"><link rel="prefetch" href="/assets/js/63.b414f496.js"><link rel="prefetch" href="/assets/js/64.58bc0c9c.js"><link rel="prefetch" href="/assets/js/65.b593055b.js"><link rel="prefetch" href="/assets/js/66.4eb75485.js"><link rel="prefetch" href="/assets/js/67.a110db76.js"><link rel="prefetch" href="/assets/js/68.f4bbae0a.js"><link rel="prefetch" href="/assets/js/69.532ecaf5.js"><link rel="prefetch" href="/assets/js/7.54ced24c.js"><link rel="prefetch" href="/assets/js/70.4a3e45cb.js"><link rel="prefetch" href="/assets/js/71.37d0cbc5.js"><link rel="prefetch" href="/assets/js/72.c19ed0ab.js"><link rel="prefetch" href="/assets/js/73.1e1c5639.js"><link rel="prefetch" href="/assets/js/75.36ed645a.js"><link rel="prefetch" href="/assets/js/76.4eb141f1.js"><link rel="prefetch" href="/assets/js/77.dea7ff9d.js"><link rel="prefetch" href="/assets/js/78.d77bc99b.js"><link rel="prefetch" href="/assets/js/79.e4856393.js"><link rel="prefetch" href="/assets/js/8.e62f1843.js"><link rel="prefetch" href="/assets/js/80.fd65c7a5.js"><link rel="prefetch" href="/assets/js/81.7754f641.js"><link rel="prefetch" href="/assets/js/82.9ab18ada.js"><link rel="prefetch" href="/assets/js/83.06c080f6.js"><link rel="prefetch" href="/assets/js/84.3b801bcb.js"><link rel="prefetch" href="/assets/js/85.f90e359b.js"><link rel="prefetch" href="/assets/js/86.5ae50729.js"><link rel="prefetch" href="/assets/js/87.1fe37ed2.js"><link rel="prefetch" href="/assets/js/88.47071570.js"><link rel="prefetch" href="/assets/js/89.0baa310a.js"><link rel="prefetch" href="/assets/js/9.fd63a988.js"><link rel="prefetch" href="/assets/js/90.714224f5.js"><link rel="prefetch" href="/assets/js/91.fbc0997e.js"><link rel="prefetch" href="/assets/js/92.c1c0a549.js"><link rel="prefetch" href="/assets/js/93.9870265b.js"><link rel="prefetch" href="/assets/js/94.ff12a7de.js"><link rel="prefetch" href="/assets/js/95.976ae2f6.js"><link rel="prefetch" href="/assets/js/96.41f2642f.js"><link rel="prefetch" href="/assets/js/97.65fe8305.js"><link rel="prefetch" href="/assets/js/98.3a87e365.js"><link rel="prefetch" href="/assets/js/99.cc9e61ce.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7eaaf838.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>89</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>24</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#67cc86;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>IOT.js适配AWorks平台通用外设接口（3）：I2C</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">IOT.js适配AWorks平台通用外设接口（3）：I2C</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2022/4/17</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/blog/embedded/iotjs_aworks_i2c.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>C</span><span class="tag-item" data-v-8a445198>嵌入式</span><span class="tag-item" data-v-8a445198>AWorks</span><span class="tag-item" data-v-8a445198>IOT.js</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1 前言</h2> <p>近期因工作需求学习了一下 IOT.js 和 AWorks 平台通用外设接口（包括：ADC、GPIO、I2C、PWM、SPI 和 UART），并将它们逐一适配到 IOT.js 中，为后续 <a href="https://github.com/zlgopen/awtk-mvvm" target="_blank" rel="noopener noreferrer">AWTK-MVMM<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 的 JS项目支持平台外设调用奠定基础，此处做笔记记录一下。</p> <ul><li><a href="/blog/embedded/iotjs_aworks_adc.html">IOT.js适配AWorks平台通用外设接口（1）：ADC</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_gpio.html">IOT.js适配AWorks平台通用外设接口（2）：GPIO</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_i2c.html" aria-current="page" class="router-link-exact-active router-link-active">IOT.js适配AWorks平台通用外设接口（3）：I2C</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_pwm.html">IOT.js适配AWorks平台通用外设接口（4）：PWM</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_spi.html">IOT.js适配AWorks平台通用外设接口（5）：SPI</a>；</li> <li><a href="/blog/embedded/iotjs_aworks_uart.html">IOT.js适配AWorks平台通用外设接口（6）：UART</a>；</li></ul> <blockquote><p>备注：IOT.js 和 AWorks 的相关介绍请看第一篇 ADC 适配笔记。</p></blockquote> <h2 id="_2-i2c"><a href="#_2-i2c" class="header-anchor">#</a> 2 I2C</h2> <h3 id="_2-1-i2c总线"><a href="#_2-1-i2c总线" class="header-anchor">#</a> 2.1 I2C总线</h3> <p>I2C总线（Inter Integrated Circuit）是NXP公司开发的用于连接微控制器与外围器件的两线制总线，不仅硬件电路非常简洁，而且还具有极强的复用性和可移植性。I2C总线不仅适用于电路板内器件之间的通信，而且通过中继器还可以实现电路板与电路板之间长距离的信号传输。</p> <h3 id="_2-2-i2c接口"><a href="#_2-2-i2c接口" class="header-anchor">#</a> 2.2 I2C接口</h3> <p>绝大部分情况下，MUC都作为I2C主机与I2C从机器件通信，因此这里仅介绍AWorks中将MCU作为I2C主机的相关接口：</p> <ul><li>aw_i2c_mkdev：初始化I2C从机实例。</li> <li>aw_i2c_read：I2C读操作。</li> <li>aw_i2c_write：I2C写操作。</li></ul> <h2 id="_3-适配过程"><a href="#_3-适配过程" class="header-anchor">#</a> 3 适配过程</h2> <h3 id="_3-1-aworks演示代码"><a href="#_3-1-aworks演示代码" class="header-anchor">#</a> 3.1 AWorks演示代码</h3> <p>先来看看I2C的基本读写功能，我们在底板上跑一下简单的例程。</p> <p>步骤一：外设使能，在AWorks工程配置文件 <code>aw_prj_params.h</code> 中开启以下宏定义使能对应的I2C从机所需的设备：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AW_DEV_IMX1050_LPI2C1</span> <span class="token comment">/**&lt; \brief iMX1050 LPI2C1 (I2C1)*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AW_DEV_EXTEND_PCF85063</span> <span class="token comment">/**&lt; \brief PCF85063 实时时钟 (需要配套I2C外设) */</span></span>
+</code></pre></div><blockquote><p>备注：如果没有对应的外设，可以暂时改用RTC0来测试，这个设备也使用 I2C 协议通信。RTC0设备地址 <code>0x51</code>，器件内部子地址（命令）<code>0x00</code>，表示读写设备内部的第一个字节。</p></blockquote> <p>步骤二：到外设文件中查看设备对应的引脚，比如这里查看 <code>awbl_hwconf_imx1050_lpi2c1.h</code> 文件，可以看到I2C设备使用的引脚有 <code>GPIO1_17</code> 和 <code>GPIO1_16</code>，我们需确定这两个引脚能正常使用。</p> <p>步骤三：编写例程，读写I2C从机中的数据。示例代码如下：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_i2c.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;string.h&quot;</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">I2C_SLAVE_ADDR</span>      <span class="token expression"><span class="token number">0x7EU</span>      </span><span class="token comment">/* 从机地址(可查看具体I2C从机的配置文件，根据配置文件修改从机地址) */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">I2C_MASTER_BUSID</span>    <span class="token expression">DE_I2C_ID  </span><span class="token comment">/* 从机使用I2C1(可查看具体I2C从机的配置文件，根据配置文件修改I2C总线) */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SLAVE_REG_SEC</span>       <span class="token expression"><span class="token number">0x02</span>       </span><span class="token comment">/* 器件内子地址，从此地址开始写入数据 */</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">aw_i2c_device_t</span>     i2c_slave<span class="token punctuation">;</span>
+    <span class="token class-name">uint8_t</span>             wr_data<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token class-name">uint8_t</span>             rd_data<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span>                 i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span>                 ret<span class="token punctuation">;</span>
+
+    <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;I2C_SYNC_Test:\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* 初始化设备实例，从机地址占7Bit，器件内部子地址占1字节 */</span>
+    <span class="token function">aw_i2c_mkdev</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>i2c_slave<span class="token punctuation">,</span>
+                 I2C_MASTER_BUSID<span class="token punctuation">,</span>
+                 I2C_SLAVE_ADDR<span class="token punctuation">,</span>
+                 AW_I2C_ADDR_7BIT <span class="token operator">|</span> AW_I2C_SUBADDR_1BYTE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* 清除缓存区 */</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>wr_data<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>rd_data<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        wr_data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* 写数据到从机设备 */</span>
+    ret <span class="token operator">=</span> <span class="token function">aw_i2c_write</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>i2c_slave<span class="token punctuation">,</span> SLAVE_REG_SEC<span class="token punctuation">,</span> <span class="token operator">&amp;</span>wr_data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;aw_i2c_write fail:%d\r\n&quot;</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;aw_i2c_write OK!\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* 从从机设备中读取数据 */</span>
+    ret <span class="token operator">=</span> <span class="token function">aw_i2c_read</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>i2c_slave<span class="token punctuation">,</span> SLAVE_REG_SEC<span class="token punctuation">,</span> <span class="token operator">&amp;</span>rd_data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;aw_i2c_read fail:%d\r\n&quot;</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;aw_i2c_read OK!\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* 数据校验 */</span>
+    ret <span class="token operator">=</span> <span class="token function">strcmp</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span> <span class="token punctuation">)</span>wr_data<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>rd_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;verify fail:%d\r\n&quot;</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">aw_kprintf</span><span class="token punctuation">(</span><span class="token string">&quot;verify OK!\r\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>I2C_SYNC_Test:
+aw_i2c_write OK<span class="token operator">!</span>
+aw_i2c_read OK<span class="token operator">!</span>
+verify OK<span class="token operator">!</span>
+</code></pre></div><h3 id="_3-2-c语言适配层"><a href="#_3-2-c语言适配层" class="header-anchor">#</a> 3.2 C语言适配层</h3> <p>在 IOT.js 中，适配某个平台的外设通常需要实现 <code>src/modules/iotjs_module_xxx.h</code> 文件中的接口，比如这里我们需要实现 <code>iotjs_module_i2c.h</code> 中的相关接口：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">IOTJS_MODULE_I2C_H</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">IOTJS_MODULE_I2C_H</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_def.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_module_periph_common.h&quot;</span></span>
+
+<span class="token comment">// Forward declaration of platform data. These are only used by platform code.</span>
+<span class="token comment">// Generic I2C module never dereferences platform data pointer.</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">iotjs_i2c_platform_data_s</span> <span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token punctuation">;</span>
+<span class="token comment">// This I2c class provides interfaces for I2C operation.</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  <span class="token class-name">jerry_value_t</span> jobject<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">;</span>
+
+  <span class="token keyword">char</span><span class="token operator">*</span> buf_data<span class="token punctuation">;</span>
+  <span class="token class-name">uint8_t</span> buf_len<span class="token punctuation">;</span>
+  <span class="token class-name">uint8_t</span> address<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token class-name">iotjs_i2c_t</span><span class="token punctuation">;</span>
+
+<span class="token class-name">jerry_value_t</span> <span class="token function">iotjs_i2c_set_platform_config</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">,</span>
+                                            <span class="token keyword">const</span> <span class="token class-name">jerry_value_t</span> jconfig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_i2c_open</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_i2c_write</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_i2c_read</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bool <span class="token function">iotjs_i2c_close</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Platform-related functions; they are implemented</span>
+<span class="token comment">// by platform code (i.e.: linux, nuttx, tizen).</span>
+<span class="token keyword">void</span> <span class="token function">iotjs_i2c_create_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">iotjs_i2c_destroy_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* IOTJS_MODULE_I2C_H */</span></span>
+</code></pre></div><p>适配层（<code>src/modules/aworks/iotjs_module_i2c-aworks.c</code>）代码如下：</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token operator">!</span><span class="token function">defined</span><span class="token punctuation">(</span>WITH_AWORKS<span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">error</span> <span class="token string">&quot;Module __FILE__ is for AWorks only&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;iotjs_def.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;aw_i2c.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;modules/iotjs_module_i2c.h&quot;</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">iotjs_i2c_platform_data_s</span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> bus<span class="token punctuation">;</span>
+  <span class="token class-name">aw_i2c_device_t</span> i2c_slave<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* 默认从机地址占7Bit，器件子地址占1字节，数据包首字节为器件地址 */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AWORKS_I2C_DEV_FLAGS</span> <span class="token punctuation">\</span>
+  <span class="token expression"><span class="token punctuation">(</span>AW_I2C_ADDR_7BIT <span class="token operator">|</span> AW_I2C_SUBADDR_1BYTE <span class="token operator">|</span> AW_I2C_SUBADDR_NONE<span class="token punctuation">)</span></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">AWORKS_I2C_SLAVE_REG_SEC</span> <span class="token expression"><span class="token number">0X00</span></span></span>
+
+<span class="token keyword">void</span> <span class="token function">iotjs_i2c_create_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  i2c<span class="token operator">-&gt;</span>platform_data <span class="token operator">=</span> <span class="token function">IOTJS_ALLOC</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  i2c<span class="token operator">-&gt;</span>platform_data<span class="token operator">-&gt;</span>bus <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">iotjs_i2c_destroy_platform_data</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">IOTJS_ASSERT</span><span class="token punctuation">(</span>platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">IOTJS_RELEASE</span><span class="token punctuation">(</span>platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token class-name">jerry_value_t</span> <span class="token function">iotjs_i2c_set_platform_config</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">,</span>
+                                            <span class="token keyword">const</span> <span class="token class-name">jerry_value_t</span> jconfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> i2c<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+
+  <span class="token function">JS_GET_REQUIRED_CONF_VALUE</span><span class="token punctuation">(</span>jconfig<span class="token punctuation">,</span> platform_data<span class="token operator">-&gt;</span>bus<span class="token punctuation">,</span>
+                             IOTJS_MAGIC_STRING_BUS<span class="token punctuation">,</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token function">jerry_create_undefined</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_i2c_open</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> i2c<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+  <span class="token function">IOTJS_ASSERT</span><span class="token punctuation">(</span>platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">aw_i2c_mkdev</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>i2c_slave<span class="token punctuation">,</span> platform_data<span class="token operator">-&gt;</span>bus<span class="token punctuation">,</span> i2c<span class="token operator">-&gt;</span>address<span class="token punctuation">,</span>
+               AWORKS_I2C_DEV_FLAGS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>platform_data<span class="token operator">-&gt;</span>i2c_slave<span class="token punctuation">.</span>addr <span class="token operator">!=</span> i2c<span class="token operator">-&gt;</span>address<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: I2C init slave error&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_i2c_close</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> i2c<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+  <span class="token function">IOTJS_ASSERT</span><span class="token punctuation">(</span>platform_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>platform_data<span class="token operator">-&gt;</span>i2c_slave<span class="token punctuation">.</span>addr <span class="token operator">!=</span> i2c<span class="token operator">-&gt;</span>address<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: cannot close I2C&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  platform_data<span class="token operator">-&gt;</span>bus <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>i2c_slave<span class="token punctuation">,</span> <span class="token number">0x00</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token class-name">aw_i2c_device_t</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_i2c_write</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">aw_err_t</span> ret<span class="token punctuation">;</span>
+  <span class="token class-name">uint8_t</span> len <span class="token operator">=</span> i2c<span class="token operator">-&gt;</span>buf_len<span class="token punctuation">;</span>
+  <span class="token class-name">uint8_t</span><span class="token operator">*</span> data <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">uint8_t</span><span class="token operator">*</span><span class="token punctuation">)</span>i2c<span class="token operator">-&gt;</span>buf_data<span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> i2c<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+  <span class="token function">IOTJS_ASSERT</span><span class="token punctuation">(</span>len <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> data <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  ret <span class="token operator">=</span> <span class="token function">aw_i2c_write</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>i2c_slave<span class="token punctuation">,</span> AWORKS_I2C_SLAVE_REG_SEC<span class="token punctuation">,</span> data<span class="token punctuation">,</span>
+                     len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">IOTJS_RELEASE</span><span class="token punctuation">(</span>i2c<span class="token operator">-&gt;</span>buf_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: cannot write data(%d)&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+bool <span class="token function">iotjs_i2c_read</span><span class="token punctuation">(</span><span class="token class-name">iotjs_i2c_t</span><span class="token operator">*</span> i2c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">aw_err_t</span> ret<span class="token punctuation">;</span>
+  <span class="token class-name">uint8_t</span> len <span class="token operator">=</span> i2c<span class="token operator">-&gt;</span>buf_len<span class="token punctuation">;</span>
+  <span class="token function">IOTJS_ASSERT</span><span class="token punctuation">(</span>len <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  i2c<span class="token operator">-&gt;</span>buf_data <span class="token operator">=</span> <span class="token function">iotjs_buffer_allocate</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">iotjs_i2c_platform_data_t</span><span class="token operator">*</span> platform_data <span class="token operator">=</span> i2c<span class="token operator">-&gt;</span>platform_data<span class="token punctuation">;</span>
+  <span class="token function">IOTJS_ASSERT</span><span class="token punctuation">(</span>i2c<span class="token operator">-&gt;</span>buf_data <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  ret <span class="token operator">=</span> <span class="token function">aw_i2c_read</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>platform_data<span class="token operator">-&gt;</span>i2c_slave<span class="token punctuation">,</span> AWORKS_I2C_SLAVE_REG_SEC<span class="token punctuation">,</span>
+                    <span class="token punctuation">(</span><span class="token class-name">uint8_t</span><span class="token operator">*</span><span class="token punctuation">)</span>i2c<span class="token operator">-&gt;</span>buf_data<span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!=</span> AW_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">DLOG</span><span class="token punctuation">(</span><span class="token string">&quot;%s: cannot read data(%d)&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_3-2-js测试代码"><a href="#_3-2-js测试代码" class="header-anchor">#</a> 3.2 JS测试代码</h3> <p>适配好后，我们编写 JS 代码测试一下，这里直接采用 RTC0 设备进行测试，该设备也采用 I2C 协议与 MCU 通信：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> i2c <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'i2c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* 导入i2c模块 */</span>
+
+<span class="token keyword">var</span> configuration <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">address</span><span class="token operator">:</span> <span class="token number">0x51</span><span class="token punctuation">,</span>  <span class="token comment">/* 从机地址 */</span>
+  <span class="token literal-property property">bus</span><span class="token operator">:</span> <span class="token number">1</span>          <span class="token comment">/* I2C总线编号 */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'I2C sync function test'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> loopCnt <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> i2cObj <span class="token operator">=</span> i2c<span class="token punctuation">.</span><span class="token function">openSync</span><span class="token punctuation">(</span>configuration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> loop <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* 第一字节为器件内部字地址，第二字节为数据 */</span>
+  i2cObj <span class="token punctuation">.</span><span class="token function">writeSync</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0x00</span><span class="token punctuation">,</span> loopCnt<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> res <span class="token operator">=</span> i2cObj <span class="token punctuation">.</span><span class="token function">readSync</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* 读取两个字节的数据 */</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'read result:'</span><span class="token punctuation">,</span> res<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">--</span>loopCnt <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">clearInterval</span><span class="token punctuation">(</span>loop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    i2cObj<span class="token punctuation">.</span><span class="token function">closeSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>I2C <span class="token function">sync</span> <span class="token keyword">function</span> <span class="token builtin class-name">test</span>
+<span class="token builtin class-name">read</span> result:5
+<span class="token builtin class-name">read</span> result:4
+<span class="token builtin class-name">read</span> result:3
+<span class="token builtin class-name">read</span> result:2
+<span class="token builtin class-name">read</span> result:1
+</code></pre></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_1-前言" class="sidebar-link reco-side-_1-前言" data-v-b57cc07c>1 前言</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_2-i2c" class="sidebar-link reco-side-_2-i2c" data-v-b57cc07c>2 I2C</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_2-1-i2c总线" class="sidebar-link reco-side-_2-1-i2c总线" data-v-b57cc07c>2.1 I2C总线</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_2-2-i2c接口" class="sidebar-link reco-side-_2-2-i2c接口" data-v-b57cc07c>2.2 I2C接口</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_3-适配过程" class="sidebar-link reco-side-_3-适配过程" data-v-b57cc07c>3 适配过程</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_3-1-aworks演示代码" class="sidebar-link reco-side-_3-1-aworks演示代码" data-v-b57cc07c>3.1 AWorks演示代码</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_3-2-c语言适配层" class="sidebar-link reco-side-_3-2-c语言适配层" data-v-b57cc07c>3.2 C语言适配层</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/embedded/iotjs_aworks_i2c.html#_3-2-js测试代码" class="sidebar-link reco-side-_3-2-js测试代码" data-v-b57cc07c>3.2 JS测试代码</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.389323ad.js" defer></script><script src="/assets/js/3.8cd7b294.js" defer></script><script src="/assets/js/1.2acc022b.js" defer></script><script src="/assets/js/74.a495e734.js" defer></script>
+  </body>
+</html>

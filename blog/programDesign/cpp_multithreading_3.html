@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C++并发与多线程笔记三：数据共享 | 天上下橙雨</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js"></script>
+    <meta name="description" content="天上下橙雨的个人博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7eaaf838.css" as="style"><link rel="preload" href="/assets/js/app.389323ad.js" as="script"><link rel="preload" href="/assets/js/3.8cd7b294.js" as="script"><link rel="preload" href="/assets/js/1.2acc022b.js" as="script"><link rel="preload" href="/assets/js/90.714224f5.js" as="script"><link rel="prefetch" href="/assets/js/10.509ef012.js"><link rel="prefetch" href="/assets/js/100.87b48422.js"><link rel="prefetch" href="/assets/js/101.26b12fac.js"><link rel="prefetch" href="/assets/js/102.7bb41561.js"><link rel="prefetch" href="/assets/js/103.9625cf57.js"><link rel="prefetch" href="/assets/js/104.656f8f66.js"><link rel="prefetch" href="/assets/js/105.01e163d8.js"><link rel="prefetch" href="/assets/js/11.c2055ebb.js"><link rel="prefetch" href="/assets/js/12.5b98e285.js"><link rel="prefetch" href="/assets/js/13.da357cb6.js"><link rel="prefetch" href="/assets/js/14.14359ca8.js"><link rel="prefetch" href="/assets/js/15.3f13fc82.js"><link rel="prefetch" href="/assets/js/16.7f349b92.js"><link rel="prefetch" href="/assets/js/17.dfbfd566.js"><link rel="prefetch" href="/assets/js/18.c5da041e.js"><link rel="prefetch" href="/assets/js/19.0f9638df.js"><link rel="prefetch" href="/assets/js/20.ebb7267b.js"><link rel="prefetch" href="/assets/js/21.01453e44.js"><link rel="prefetch" href="/assets/js/22.dd08b5d9.js"><link rel="prefetch" href="/assets/js/23.59d3ba1f.js"><link rel="prefetch" href="/assets/js/24.b4851731.js"><link rel="prefetch" href="/assets/js/25.8fe447e5.js"><link rel="prefetch" href="/assets/js/26.ba72535f.js"><link rel="prefetch" href="/assets/js/27.d78e5a7f.js"><link rel="prefetch" href="/assets/js/28.869cfdab.js"><link rel="prefetch" href="/assets/js/29.94d6c0da.js"><link rel="prefetch" href="/assets/js/30.4d578f75.js"><link rel="prefetch" href="/assets/js/31.b176b736.js"><link rel="prefetch" href="/assets/js/32.b0e5c692.js"><link rel="prefetch" href="/assets/js/33.50670ab7.js"><link rel="prefetch" href="/assets/js/34.ca843b26.js"><link rel="prefetch" href="/assets/js/35.9d0a871d.js"><link rel="prefetch" href="/assets/js/36.058658f5.js"><link rel="prefetch" href="/assets/js/37.79702756.js"><link rel="prefetch" href="/assets/js/38.3becf2a9.js"><link rel="prefetch" href="/assets/js/39.ce9c4993.js"><link rel="prefetch" href="/assets/js/4.7234e624.js"><link rel="prefetch" href="/assets/js/40.63f404db.js"><link rel="prefetch" href="/assets/js/41.055093b0.js"><link rel="prefetch" href="/assets/js/42.fdac0499.js"><link rel="prefetch" href="/assets/js/43.eccc4bc3.js"><link rel="prefetch" href="/assets/js/44.15c550df.js"><link rel="prefetch" href="/assets/js/45.e1f3a91a.js"><link rel="prefetch" href="/assets/js/46.2f663949.js"><link rel="prefetch" href="/assets/js/47.e414f8b4.js"><link rel="prefetch" href="/assets/js/48.33742d27.js"><link rel="prefetch" href="/assets/js/49.39d768fb.js"><link rel="prefetch" href="/assets/js/5.c5df887a.js"><link rel="prefetch" href="/assets/js/50.6f7b21d1.js"><link rel="prefetch" href="/assets/js/51.dd0d4797.js"><link rel="prefetch" href="/assets/js/52.d6b486de.js"><link rel="prefetch" href="/assets/js/53.a375da01.js"><link rel="prefetch" href="/assets/js/54.286f4db9.js"><link rel="prefetch" href="/assets/js/55.4eca20c6.js"><link rel="prefetch" href="/assets/js/56.3e29c0fe.js"><link rel="prefetch" href="/assets/js/57.ba66cfdf.js"><link rel="prefetch" href="/assets/js/58.9ab4c356.js"><link rel="prefetch" href="/assets/js/59.f4a92ca7.js"><link rel="prefetch" href="/assets/js/6.c5c0e212.js"><link rel="prefetch" href="/assets/js/60.25abd7f9.js"><link rel="prefetch" href="/assets/js/61.7152649d.js"><link rel="prefetch" href="/assets/js/62.9c19bfc5.js"><link rel="prefetch" href="/assets/js/63.b414f496.js"><link rel="prefetch" href="/assets/js/64.58bc0c9c.js"><link rel="prefetch" href="/assets/js/65.b593055b.js"><link rel="prefetch" href="/assets/js/66.4eb75485.js"><link rel="prefetch" href="/assets/js/67.a110db76.js"><link rel="prefetch" href="/assets/js/68.f4bbae0a.js"><link rel="prefetch" href="/assets/js/69.532ecaf5.js"><link rel="prefetch" href="/assets/js/7.54ced24c.js"><link rel="prefetch" href="/assets/js/70.4a3e45cb.js"><link rel="prefetch" href="/assets/js/71.37d0cbc5.js"><link rel="prefetch" href="/assets/js/72.c19ed0ab.js"><link rel="prefetch" href="/assets/js/73.1e1c5639.js"><link rel="prefetch" href="/assets/js/74.a495e734.js"><link rel="prefetch" href="/assets/js/75.36ed645a.js"><link rel="prefetch" href="/assets/js/76.4eb141f1.js"><link rel="prefetch" href="/assets/js/77.dea7ff9d.js"><link rel="prefetch" href="/assets/js/78.d77bc99b.js"><link rel="prefetch" href="/assets/js/79.e4856393.js"><link rel="prefetch" href="/assets/js/8.e62f1843.js"><link rel="prefetch" href="/assets/js/80.fd65c7a5.js"><link rel="prefetch" href="/assets/js/81.7754f641.js"><link rel="prefetch" href="/assets/js/82.9ab18ada.js"><link rel="prefetch" href="/assets/js/83.06c080f6.js"><link rel="prefetch" href="/assets/js/84.3b801bcb.js"><link rel="prefetch" href="/assets/js/85.f90e359b.js"><link rel="prefetch" href="/assets/js/86.5ae50729.js"><link rel="prefetch" href="/assets/js/87.1fe37ed2.js"><link rel="prefetch" href="/assets/js/88.47071570.js"><link rel="prefetch" href="/assets/js/89.0baa310a.js"><link rel="prefetch" href="/assets/js/9.fd63a988.js"><link rel="prefetch" href="/assets/js/91.fbc0997e.js"><link rel="prefetch" href="/assets/js/92.c1c0a549.js"><link rel="prefetch" href="/assets/js/93.9870265b.js"><link rel="prefetch" href="/assets/js/94.ff12a7de.js"><link rel="prefetch" href="/assets/js/95.976ae2f6.js"><link rel="prefetch" href="/assets/js/96.41f2642f.js"><link rel="prefetch" href="/assets/js/97.65fe8305.js"><link rel="prefetch" href="/assets/js/98.3a87e365.js"><link rel="prefetch" href="/assets/js/99.cc9e61ce.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7eaaf838.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>天上下橙雨</h3> <p class="description" data-v-59e6cb88>天上下橙雨的个人博客</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="天上下橙雨" class="logo"> <span class="site-name">天上下橙雨</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/head.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    天上下橙雨
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>89</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>24</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-csdn" style="color:#3498db;" data-v-1fad0c41></i></li><li class="social-item" data-v-1fad0c41><i class="iconfont reco-mail" style="color:#67cc86;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/设计模式/" class="nav-link"><i class="undefined"></i>
+  设计模式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/嵌入式/" class="nav-link"><i class="undefined"></i>
+  嵌入式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GUI/" class="nav-link"><i class="undefined"></i>
+  GUI
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/程序设计/" class="nav-link"><i class="undefined"></i>
+  程序设计
+</a></li><li class="dropdown-item"><!----> <a href="/categories/编程原理/" class="nav-link"><i class="undefined"></i>
+  编程原理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/重构/" class="nav-link"><i class="undefined"></i>
+  重构
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  归档
+</a></div><div class="nav-item"><a href="/msg_board/" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>C++并发与多线程笔记三：数据共享</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>天上下橙雨</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">C++并发与多线程笔记三：数据共享</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>天上下橙雨</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2022/4/2</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/blog/programDesign/cpp_multithreading_3.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>C++</span><span class="tag-item" data-v-8a445198>并发</span><span class="tag-item" data-v-8a445198>多线程</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1 前言</h2> <p>本文接上文 <a href="/blog/programDesign/cpp_multithreading_2.html">C++并发与多线程笔记二</a> 的内容，主要包含创建多个线程、数据共享问题分析和案例代码。</p> <h2 id="_2-创建和等待多个线程"><a href="#_2-创建和等待多个线程" class="header-anchor">#</a> 2 创建和等待多个线程</h2> <p>这里创建十个线程，并且使用同一个 入口函数 <code>my_thread()</code>，代码如下：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">my_thread</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;my thread start, num = &quot;</span> <span class="token operator">&lt;&lt;</span> num <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token comment">/* 线程代码 */</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;my thread end, num = &quot;</span> <span class="token operator">&lt;&lt;</span> num <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	vector<span class="token operator">&lt;</span>thread<span class="token operator">&gt;</span> m_threads<span class="token punctuation">;</span>
+	<span class="token comment">/* 创建10个线程，线程回调统一用 my_thread() */</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		m_threads<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token function">thread</span><span class="token punctuation">(</span>my_thread<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 创建线程并开始执行 */</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> iter <span class="token operator">=</span> m_threads<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> iter <span class="token operator">!=</span> m_threads<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>iter<span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		iter<span class="token operator">-&gt;</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 等待线程结束 */</span>
+	<span class="token punctuation">}</span>
+
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>my thread start, num <span class="token operator">=</span> 0my thread start, num <span class="token operator">=</span> <span class="token number">2</span>
+my thread start, num <span class="token operator">=</span> my thread start, num <span class="token operator">=</span> 6my thread start, num <span class="token operator">=</span> my thread start, num <span class="token operator">=</span> <span class="token number">9</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">9</span>
+
+my thread end, num <span class="token operator">=</span> <span class="token number">6</span>
+my thread start, num <span class="token operator">=</span> <span class="token number">1</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token number">8</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">8</span>
+my thread start, num <span class="token operator">=</span> <span class="token number">7</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">7</span>
+
+my thread end, num <span class="token operator">=</span> <span class="token number">0</span>
+my thread start, num <span class="token operator">=</span> <span class="token number">4</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">4</span>
+my thread start, num <span class="token operator">=</span> <span class="token number">3</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token number">5</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">5</span>
+my thread end, num <span class="token operator">=</span> <span class="token number">2</span>
+Hello World<span class="token operator">!</span>
+</code></pre></div><ol><li>可以看到线程并不是按照创建顺序执行的，先创建的线程不一定先执行，这个跟操作系统内部对线程的运行调度机制有关。</li> <li>主线程等待所有子线程运行结束，最后主线程结束，使用 <code>join()</code> 更容易写出稳定的程序。</li> <li>把thread对象放入到 vector 容器中（类似对象数组），方便管理。</li></ol> <h2 id="_3-数据共享问题分析"><a href="#_3-数据共享问题分析" class="header-anchor">#</a> 3 数据共享问题分析</h2> <h3 id="_3-1-只读数据"><a href="#_3-1-只读数据" class="header-anchor">#</a> 3.1 只读数据</h3> <p>如果一份数据是只读的，提供给多个线程使用，每个线程读到的数据都是一样的，这份数据仍然是<strong>安全稳定的</strong>，比如以下代码中的 <code>g_value</code>：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> g_value <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">/* 共享数据(只读) */</span>
+
+<span class="token keyword">void</span> <span class="token function">my_thread</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;thread id = &quot;</span> <span class="token operator">&lt;&lt;</span> this_thread<span class="token double-colon punctuation">::</span><span class="token function">get_id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\t g_v: &quot;</span> <span class="token operator">&lt;&lt;</span> g_value<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> g_value<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> g_value<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	vector<span class="token operator">&lt;</span>thread<span class="token operator">&gt;</span> m_threads<span class="token punctuation">;</span>
+	<span class="token comment">/* 创建10个线程，线程回调统一用 my_thread() */</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		m_threads<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token function">thread</span><span class="token punctuation">(</span>my_thread<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 创建线程并开始执行 */</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> iter <span class="token operator">=</span> m_threads<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> iter <span class="token operator">!=</span> m_threads<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>iter<span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		iter<span class="token operator">-&gt;</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 等待线程结束 */</span>
+	<span class="token punctuation">}</span>
+
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出结果：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>thread <span class="token function">id</span> <span class="token operator">=</span> thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">12104</span>    g_v: 1thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">9116</span>  g_v: 123thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">4540</span>        g_v: <span class="token number">123</span>
+thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">5108</span>         g_v: <span class="token number">123</span>
+thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">2616</span>         g_v: <span class="token number">123</span>
+thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">18056</span>        g_v: <span class="token number">123</span>
+thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">2420</span>         g_v: <span class="token number">123</span>
+
+thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">7440</span>         g_v: <span class="token number">123</span>
+<span class="token number">23</span>
+thread <span class="token function">id</span> <span class="token operator">=</span> <span class="token number">4484</span>         g_v: <span class="token number">123</span>
+<span class="token number">4764</span>     g_v: <span class="token number">123</span>
+Hello World<span class="token operator">!</span>
+</code></pre></div><h3 id="_3-2-读写数据"><a href="#_3-2-读写数据" class="header-anchor">#</a> 3.2 读写数据</h3> <p>比如两个线程写<code>g_value</code>，八个线程读<code>g_value</code>，如果代码没有特别处理，那程序大概率会崩溃，或者得到错误的结果，发生各种不可预料的结果。</p> <p>最简单的处理就是读的时候不能写，写的时候不能读，多个线程之间不能同时写，也就说我们经常说的线程同步问题。</p> <h3 id="_3-3-其他案例"><a href="#_3-3-其他案例" class="header-anchor">#</a> 3.3 其他案例</h3> <p>假设目前在售卖从北京到深圳的火车票，车次为T123，共有10个售票窗口，其中1号窗口和2号窗口的顾客同时都要订99号座位，那这个时候在程序中的处理逻辑应该如下：</p> <ol><li>假设先处理1号窗口的订单，首先需要查看这个99号座位是否为空，这里是读数据；</li> <li>如果为空，则帮顾客订购99号座位，并录入系统，这里是写数据；</li> <li>2号窗口在1号窗口的操作的过程中必须等着，只有等1号窗口操作完成，2号窗口才能开始操作。</li></ol> <h2 id="_4-共享数据案例代码"><a href="#_4-共享数据案例代码" class="header-anchor">#</a> 4 共享数据案例代码</h2> <p>假设做一个网络游戏服务器，有两个子线程：</p> <ul><li>子线程1收集玩家命令，并把命令数据写到一个队列中。</li> <li>子线程2从队列中取出玩家发出来的命令并解析，然后执行玩家需要的动作。</li></ul> <p>此处为了简化实现，用一个数字代表玩家发出来的命令，并且基于面向对象的思想，使用成员函数作为线程回调函数。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;list&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">A</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+	<span class="token comment">/* 把收到的消息（玩家命令）存到队列中 */</span>
+	<span class="token keyword">void</span> <span class="token function">inMsgRecvQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100000</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;inMsgRecvQueue exec, push an elem &quot;</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+			msgRecvQueue<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 假设数字 i 就是收到的玩家命令 */</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">/* 把数据从消息队列中取出 */</span>
+	<span class="token keyword">void</span> <span class="token function">outMsgRecvQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100000</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>msgRecvQueue<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+			<span class="token punctuation">{</span>
+				<span class="token keyword">int</span> command <span class="token operator">=</span> msgRecvQueue<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 返回第一个元素 */</span>
+				msgRecvQueue<span class="token punctuation">.</span><span class="token function">pop_front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>			<span class="token comment">/* 移除第一个元素 */</span>
+			<span class="token punctuation">}</span>
+			<span class="token keyword">else</span>
+			<span class="token punctuation">{</span>
+				<span class="token comment">/* 消息队列为空 */</span>
+				cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;outMsgRecvQueue exec, but queue is empty!&quot;</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;outMsgRecvQueue exec end!&quot;</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+	list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> msgRecvQueue<span class="token punctuation">;</span> <span class="token comment">/* 容器（实际上是双向链表）：存放玩家发生命令的队列 */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	A obj<span class="token punctuation">;</span>
+	thread <span class="token function">myInMsgObj</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>A<span class="token double-colon punctuation">::</span>inMsgRecvQueue<span class="token punctuation">,</span> <span class="token operator">&amp;</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	thread <span class="token function">myOutMsgObj</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>A<span class="token double-colon punctuation">::</span>outMsgRecvQueue<span class="token punctuation">,</span> <span class="token operator">&amp;</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	myInMsgObj<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	myOutMsgObj<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这里的消息队列 msgRecvQueue 就是共享数据，以上程序运行时会出现崩溃或数据乱套的现象，因为两个线程的回调函数 <code>inMsgRecvQueue()</code> 和 <code>outMsgRecvQueue()</code> 分别在不断读写消息队列 <code>msgRecvQueue</code>，由于不做任何限制，可能会出现 in 线程还没 push 完一个数据时，out 线程就已经把消息队列中的首元素删除的情况，这时 in 线程 push 的数据就不知道飞到哪里去了。</p> <p><strong>这里抛出问题，下篇我们通过互斥量来解决这个问题。</strong></p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_3.html#_1-前言" class="sidebar-link reco-side-_1-前言" data-v-b57cc07c>1 前言</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_3.html#_2-创建和等待多个线程" class="sidebar-link reco-side-_2-创建和等待多个线程" data-v-b57cc07c>2 创建和等待多个线程</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_3.html#_3-数据共享问题分析" class="sidebar-link reco-side-_3-数据共享问题分析" data-v-b57cc07c>3 数据共享问题分析</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_3.html#_3-1-只读数据" class="sidebar-link reco-side-_3-1-只读数据" data-v-b57cc07c>3.1 只读数据</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_3.html#_3-2-读写数据" class="sidebar-link reco-side-_3-2-读写数据" data-v-b57cc07c>3.2 读写数据</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_3.html#_3-3-其他案例" class="sidebar-link reco-side-_3-3-其他案例" data-v-b57cc07c>3.3 其他案例</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/programDesign/cpp_multithreading_3.html#_4-共享数据案例代码" class="sidebar-link reco-side-_4-共享数据案例代码" data-v-b57cc07c>4 共享数据案例代码</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.389323ad.js" defer></script><script src="/assets/js/3.8cd7b294.js" defer></script><script src="/assets/js/1.2acc022b.js" defer></script><script src="/assets/js/90.714224f5.js" defer></script>
+  </body>
+</html>
